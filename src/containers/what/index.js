@@ -38,10 +38,8 @@ export default ({ data }) => {
 				"fields.indoor": `${indoor}`,
 				content_type: "category",
 			})
-			.then(function(entries) {
-				setCategories(entries.items);
-			});
-	}, []);
+			.then(entries => setCategories(entries.items));
+	}, [indoor]);
 
 	return (
 		<Layout>
@@ -52,10 +50,7 @@ export default ({ data }) => {
 				{categories &&
 					categories.map(category => (
 						<Link
-							onClick={() => {
-								console.log(category.sys.id);
-								setCategory(category.sys.id);
-							}}
+							onClick={() => setCategory(category.sys.id)}
 							key={category.sys.id}
 							to="/which"
 						>

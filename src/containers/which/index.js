@@ -6,7 +6,7 @@ import Layout from "../../components/layout";
 import Activity from "../../components/category";
 import UpArrow from "../../assets/icons/up-arrow.svg";
 import DownArrow from "../../assets/icons/down-arrow.svg";
-import { MultiplayerContext, CategoryContext } from "../app";
+import { MultiplayerContext, CategoryContext, ActivityContext } from "../app";
 
 var contentful = require("contentful");
 const Conatiner = styled.div`
@@ -25,6 +25,7 @@ export default ({ data }) => {
 	const [activities, setActivities] = useState([]);
 	const [multiplayer, setMultiplayer] = useContext(MultiplayerContext);
 	const [category, setCategory] = useContext(CategoryContext);
+	const [activity, setActivity] = useContext(ActivityContext);
 
 	useEffect(() => {
 		const client = contentful.createClient({
@@ -39,9 +40,7 @@ export default ({ data }) => {
 				"fields.category.sys.id": `${category}`,
 				content_type: "activity",
 			})
-			.then(function(entries) {
-				setActivities(entries.items);
-			});
+			.then(entries => setActivities(entries.items));
 	}, [multiplayer, category]);
 
 	return (
@@ -51,7 +50,11 @@ export default ({ data }) => {
 			</Link>
 			<Conatiner>
 				{activities.map(activity => (
-					<Link key={activity.sys.id} to="/letsgo">
+					<Link
+						onClick={() => setActivity(activity.sys.id)}
+						key={activity.sys.id}
+						to="/letsgo"
+					>
 						<Activity
 							src={activity.fields.featureImg[0].fields.file.url}
 							title={activity.fields.title}

@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import styled from "styled-components";
-import { Link, graphql } from "gatsby";
+import { Link } from "react-router-dom";
 
-import Layout from "../components/layout";
-import Icon from "../components/icon";
-import UpArrow from "../../static/icons/up-arrow.svg";
+import Layout from "../../components/layout";
+import UpArrow from "../../assets/icons/up-arrow.svg";
+import { ActivityContext } from "../app";
 
+var contentful = require("contentful");
 const Conatiner = styled.div`
 	flex: 1;
 	display: flex;
@@ -18,16 +19,42 @@ const FeatureImg = styled.img`
 	height: 150px;
 `;
 
+const Icon = styled.img`
+	height: ${props => (props.size === "small" ? "25px" : "25px")};
+`;
+
 export default ({ data }) => {
-	const [activity, setActivity] = useState([]);
+	const [activity, setActivity] = useContext(ActivityContext);
+	const [selected, setSelected] = useState(null);
+
+	useEffect(() => {
+		const client = contentful.createClient({
+			space: "xsej5tvgomz6",
+			accessToken:
+				"2585b2432776f2801240a4257fce8d9c9584975557ec8ae312bc5c1acc0593d6",
+		});
+
+		client
+			.getEntry(activity)
+			.then(entry => {
+				console.log(entry);
+				setSelected(entry);
+			})
+			.catch(error => console.log(error));
+	}, [activity]);
+
 	return (
 		<Layout>
 			<Link to="/what">
 				<Icon src={UpArrow} />
 			</Link>
 			<Conatiner>
-				<FeatureImg src={activity.featureImg[0].fluid.src} />
-				<p>{activity.description.description}</p>
+				{selected && (
+					<>
+						<FeatureImg src={selected.fields.featureImg[0].fields.file.url} />
+						<p>{selected.fields.description}</p>{" "}
+					</>
+				)}
 			</Conatiner>
 		</Layout>
 	);
