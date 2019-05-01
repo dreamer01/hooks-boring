@@ -5,7 +5,7 @@ import "./styles.css";
 import Home from "../home";
 import Where from "../where";
 import What from "../what";
-import Which from "../home";
+import Which from "../which";
 
 function App() {
 	return (
