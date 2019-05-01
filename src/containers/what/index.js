@@ -38,7 +38,10 @@ export default ({ data }) => {
 				"fields.indoor": `${indoor}`,
 				content_type: "category",
 			})
-			.then(entries => setCategories(entries.items));
+			.then(entries => {
+				console.log(entries.items);
+				setCategories(entries.items);
+			});
 	}, [indoor]);
 
 	return (
