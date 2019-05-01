@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
@@ -6,6 +6,7 @@ import Layout from "../../components/layout";
 import Activity from "../../components/category";
 import UpArrow from "../../assets/icons/up-arrow.svg";
 import DownArrow from "../../assets/icons/down-arrow.svg";
+import { MultiplayerContext, CategoryContext } from "../app";
 
 var contentful = require("contentful");
 const Conatiner = styled.div`
@@ -22,6 +23,8 @@ const Icon = styled.img`
 
 export default ({ data }) => {
 	const [activities, setActivities] = useState([]);
+	const [multiplayer, setMultiplayer] = useContext(MultiplayerContext);
+	const [category, setCategory] = useContext(CategoryContext);
 
 	useEffect(() => {
 		const client = contentful.createClient({
@@ -32,12 +35,14 @@ export default ({ data }) => {
 
 		client
 			.getEntries({
+				"fields.multiplayer": `${multiplayer}`,
+				"fields.category.sys.id": `${category}`,
 				content_type: "activity",
 			})
 			.then(function(entries) {
 				setActivities(entries.items);
 			});
-	}, []);
+	}, [multiplayer, category]);
 
 	return (
 		<Layout>

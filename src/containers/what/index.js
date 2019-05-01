@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
@@ -6,6 +6,7 @@ import Layout from "../../components/layout";
 import Category from "../../components/category";
 import UpArrow from "../../assets/icons/up-arrow.svg";
 import DownArrow from "../../assets/icons/down-arrow.svg";
+import { IndoorContext, CategoryContext } from "../app";
 
 var contentful = require("contentful");
 const Conatiner = styled.div`
@@ -22,6 +23,8 @@ const Icon = styled.img`
 
 export default ({ data }) => {
 	let [categories, setCategories] = useState([]);
+	const [indoor, setIndoor] = useContext(IndoorContext);
+	const [category, setCategory] = useContext(CategoryContext);
 
 	useEffect(() => {
 		const client = contentful.createClient({
@@ -32,10 +35,10 @@ export default ({ data }) => {
 
 		client
 			.getEntries({
+				"fields.indoor": `${indoor}`,
 				content_type: "category",
 			})
 			.then(function(entries) {
-				console.log(entries.items[0].fields.featureImg.fields);
 				setCategories(entries.items);
 			});
 	}, []);
@@ -48,7 +51,14 @@ export default ({ data }) => {
 			<Conatiner>
 				{categories &&
 					categories.map(category => (
-						<Link key={category.sys.id} to="/which">
+						<Link
+							onClick={() => {
+								console.log(category.sys.id);
+								setCategory(category.sys.id);
+							}}
+							key={category.sys.id}
+							to="/which"
+						>
 							<Category
 								src={category.fields.featureImg.fields.file.url}
 								title={category.fields.title}

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
@@ -6,6 +6,7 @@ import Layout from "../../components/layout";
 import DownArrow from "../../assets/icons/down-arrow.svg";
 import AloneSvg from "../../assets/images/alone.svg";
 import CompanySvg from "../../assets/images/company.svg";
+import { MultiplayerContext } from "../app";
 
 const Conatiner = styled.div`
 	flex: 1;
@@ -25,24 +26,28 @@ const Icon = styled.img`
 	height: ${props => (props.size === "small" ? "25px" : "25px")};
 `;
 
-export default () => (
-	<div>
-		<Layout>
-			<Conatiner>
-				<ActionGroup>
-					<Link to="/where">
-						<Actions src={AloneSvg} />
-					</Link>
-					<h2>You All Alone</h2>
-				</ActionGroup>
-				<ActionGroup>
-					<Link to="/where">
-						<Actions src={CompanySvg} />
-					</Link>
-					<h2>No, Got Company</h2>
-				</ActionGroup>
-			</Conatiner>
-			<Icon src={DownArrow} />
-		</Layout>
-	</div>
-);
+export default () => {
+	const [multiplayer, setMultiplayer] = useContext(MultiplayerContext);
+
+	return (
+		<>
+			<Layout>
+				<Conatiner>
+					<ActionGroup>
+						<Link to="/where">
+							<Actions onClick={() => setMultiplayer(false)} src={AloneSvg} />
+						</Link>
+						<h2>You All Alone</h2>
+					</ActionGroup>
+					<ActionGroup>
+						<Link to="/where">
+							<Actions onClick={() => setMultiplayer(true)} src={CompanySvg} />
+						</Link>
+						<h2>No, Got Company</h2>
+					</ActionGroup>
+				</Conatiner>
+				<Icon src={DownArrow} />
+			</Layout>
+		</>
+	);
+};
