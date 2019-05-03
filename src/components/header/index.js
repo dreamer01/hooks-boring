@@ -16,10 +16,16 @@ const Wrapper = styled(Row)`
 
 const Logo = styled.img`
 	height: 50px;
+	@media (max-width: 700px) {
+		height: 35px;
+	}
 `;
 
 const Title = styled.h1`
 	margin-left: 10px;
+	@media (max-width: 700px) {
+		font-size: 24px;
+	}
 `;
 
 const About = styled.p`

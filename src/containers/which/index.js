@@ -34,13 +34,18 @@ export default ({ data }) => {
 				"2585b2432776f2801240a4257fce8d9c9584975557ec8ae312bc5c1acc0593d6",
 		});
 
-		client
-			.getEntries({
-				"fields.multiplayer": `${multiplayer}`,
-				"fields.category.sys.id": `${category}`,
-				content_type: "activity",
-			})
-			.then(entries => setActivities(entries.items));
+		const options = multiplayer
+			? {
+					"fields.category.sys.id": `${category}`,
+					content_type: "activity",
+			  }
+			: {
+					"fields.multiplayer": `${multiplayer}`,
+					"fields.category.sys.id": `${category}`,
+					content_type: "activity",
+			  };
+
+		client.getEntries(options).then(entries => setActivities(entries.items));
 	}, [multiplayer, category]);
 
 	return (

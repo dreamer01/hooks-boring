@@ -83,6 +83,9 @@ const customTypography = {
 			fontWeight: options.bodyWeight,
 			fontStyle: "normal",
 		},
+		img: {
+			marginBottom: 0,
+		},
 	}),
 };
 

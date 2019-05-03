@@ -4,6 +4,7 @@ import ImagePalette from "react-image-palette";
 
 const Wrapper = styled.div`
 	text-align: center;
+	height: 250px;
 `;
 
 const Conatiner = styled.div`
@@ -11,16 +12,18 @@ const Conatiner = styled.div`
 	flex-flow: row wrap;
 	width: 200px;
 	justify-content: center;
+	position: relative;
+	bottom: 100px;
 `;
 
 const Cover = styled.img`
-	position: relative;
-	top: 100px;
 	height: 150px;
 	width: 150px;
 	object-fit: cover;
 	border-radius: 10px;
-	z-index: 3;
+	z-index: 1;
+	position: relative;
+	top: 0px;
 `;
 
 // const Clipped = styled.div`
@@ -34,11 +37,11 @@ const Cover = styled.img`
 // `;
 
 const Inner = styled.div`
-	height: 120px;
+	height: 125px;
 	width: 100%;
 	text-align: center;
 	border-radius: 0 0 10px 10px;
-	box-shadow: ${props => props.shadow} 0px 10px 20px;
+	box-shadow: ${props => props.shadow} 0px 30px 50px -20px;
 `;
 
 const Shape = styled.svg`

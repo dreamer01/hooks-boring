@@ -14,16 +14,28 @@ const Conatiner = styled.div`
 	width: 100%;
 	align-items: center;
 	justify-content: space-around;
+	@media (max-width: 700px) {
+		flex-direction: column;
+	}
 `;
-const Actions = styled.img`
+const ActionImg = styled.img`
 	height: 200px;
 	margin: 10px;
+	@media (max-width: 400px) {
+		height: 100px;
+	}
 `;
 const ActionGroup = styled.div`
 	text-align: center;
 `;
 const Icon = styled.img`
 	height: ${props => (props.size === "small" ? "25px" : "25px")};
+`;
+
+const Action = styled.h2`
+	@media (max-width: 400px) {
+		font-size: 16px;
+	}
 `;
 
 export default () => {
@@ -35,15 +47,18 @@ export default () => {
 				<Conatiner>
 					<ActionGroup>
 						<Link to="/where">
-							<Actions onClick={() => setMultiplayer(false)} src={AloneSvg} />
+							<ActionImg onClick={() => setMultiplayer(false)} src={AloneSvg} />
 						</Link>
-						<h2>You All Alone</h2>
+						<Action>You All Alone</Action>
 					</ActionGroup>
 					<ActionGroup>
 						<Link to="/where">
-							<Actions onClick={() => setMultiplayer(true)} src={CompanySvg} />
+							<ActionImg
+								onClick={() => setMultiplayer(true)}
+								src={CompanySvg}
+							/>
 						</Link>
-						<h2>No, Got Company</h2>
+						<Action>No, Got Company</Action>
 					</ActionGroup>
 				</Conatiner>
 				<Icon src={DownArrow} />
