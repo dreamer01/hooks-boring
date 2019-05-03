@@ -5,6 +5,7 @@ import ImagePalette from "react-image-palette";
 const Wrapper = styled.div`
 	text-align: center;
 	height: 250px;
+	margin: 20px;
 `;
 
 const Conatiner = styled.div`

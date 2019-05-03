@@ -12,6 +12,7 @@ var contentful = require("contentful");
 const Conatiner = styled.div`
 	flex: 1;
 	display: flex;
+	flex-wrap: wrap;
 	width: 100%;
 	align-items: center;
 	justify-content: space-around;
