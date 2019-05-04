@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import Helmet from "react-helmet";
 
 import Layout from "../../components/layout";
 import Category from "../../components/category";
@@ -46,6 +47,13 @@ export default ({ data }) => {
 
 	return (
 		<Layout>
+			<Helmet>
+				<title>What interest you ?</title>
+				<meta
+					name="description"
+					content="What you are interested to do today."
+				/>
+			</Helmet>
 			<Link to="/where">
 				<Icon src={UpArrow} />
 			</Link>
@@ -53,7 +61,7 @@ export default ({ data }) => {
 				{categories &&
 					categories.map(category => (
 						<Link
-							onClick={() => setCategory(category.sys.id)}
+							onClick={() => setCategory(category)}
 							key={category.sys.id}
 							to="/which"
 						>

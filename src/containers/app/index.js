@@ -15,7 +15,7 @@ export const ActivityContext = React.createContext();
 function App() {
 	const [multiplayer, setMultiplayer] = useState(false);
 	const [indoor, setIndoor] = useState(true);
-	const [category, setCategory] = useState("");
+	const [category, setCategory] = useState({});
 	const [activity, setActivity] = useState("");
 
 	return (

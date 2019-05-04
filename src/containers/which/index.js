@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import styled from "styled-components";
+import Helmet from "react-helmet";
 import { Link } from "react-router-dom";
 
 import Layout from "../../components/layout";
@@ -34,15 +35,16 @@ export default ({ data }) => {
 			accessToken:
 				"2585b2432776f2801240a4257fce8d9c9584975557ec8ae312bc5c1acc0593d6",
 		});
+		console.log(category.fields.title);
 
 		const options = multiplayer
 			? {
-					"fields.category.sys.id": `${category}`,
+					"fields.category.sys.id": `${category.sys.id}`,
 					content_type: "activity",
 			  }
 			: {
 					"fields.multiplayer": `${multiplayer}`,
-					"fields.category.sys.id": `${category}`,
+					"fields.category.sys.id": `${category.sys.id}`,
 					content_type: "activity",
 			  };
 
@@ -51,13 +53,17 @@ export default ({ data }) => {
 
 	return (
 		<Layout>
+			<Helmet>
+				<title>{category.fields.title}</title>
+				<meta name="description" content="Where you are comfortable." />
+			</Helmet>
 			<Link to="/what">
 				<Icon src={UpArrow} />
 			</Link>
 			<Conatiner>
 				{activities.map(activity => (
 					<Link
-						onClick={() => setActivity(activity.sys.id)}
+						onClick={() => setActivity(activity)}
 						key={activity.sys.id}
 						to="/letsgo"
 					>

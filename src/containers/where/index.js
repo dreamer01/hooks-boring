@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
+import Helmet from "react-helmet";
 import { Link } from "react-router-dom";
 
 import Layout from "../../components/layout";
@@ -45,6 +46,10 @@ export default () => {
 	return (
 		<div>
 			<Layout>
+				<Helmet>
+					<title>Where we heading ?</title>
+					<meta name="description" content="Where you are comfortable." />
+				</Helmet>
 				<Link to="/">
 					<Icon src={UpArrow} />
 				</Link>
