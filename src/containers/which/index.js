@@ -56,6 +56,9 @@ export default ({ data }) => {
 			<Helmet>
 				<title>{category.fields.title}</title>
 				<meta name="description" content="Where you are comfortable." />
+				<noscript>
+					To display activity list app will require Javascript.
+				</noscript>
 			</Helmet>
 			<Link to="/what">
 				<Icon src={UpArrow} />

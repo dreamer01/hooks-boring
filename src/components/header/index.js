@@ -29,8 +29,7 @@ const Title = styled.h1`
 `;
 
 const About = styled.p`
-	justify-self: flex-end;
-	font: 20px;
+	font-size: 18px;
 	font-weight: 600;
 `;
 
@@ -43,7 +42,9 @@ export default () => {
 					<Title>Kya Karen</Title>
 				</Row>
 			</Link>
-			<About>About</About>
+			<Link to="/about">
+				<About>About</About>
+			</Link>
 		</Wrapper>
 	);
 };

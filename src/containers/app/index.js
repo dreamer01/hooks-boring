@@ -6,6 +6,7 @@ import Where from "../where";
 import What from "../what";
 import Which from "../which";
 import Letsgo from "../letsgo";
+import About from "../about";
 
 export const MultiplayerContext = React.createContext();
 export const IndoorContext = React.createContext();
@@ -29,6 +30,7 @@ function App() {
 							<Route exact path="/what" component={What} />
 							<Route exact path="/which" component={Which} />
 							<Route exact path="/letsgo" component={Letsgo} />
+							<Route exact path="/about" component={About} />
 						</Switch>
 					</ActivityContext.Provider>
 				</CategoryContext.Provider>

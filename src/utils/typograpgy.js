@@ -9,7 +9,7 @@ const customTypography = {
 	headerWeight: 500,
 	googleFonts: [
 		{
-			name: "Raleway",
+			name: "Bitter",
 			styles: ["700"],
 		},
 		{
@@ -31,37 +31,37 @@ const customTypography = {
 			textDecoration: "none",
 		},
 		h1: {
-			fontFamily: ["Raleway", "Oxygen"].join(","),
+			fontFamily: ["Bitter", "Oxygen"].join(","),
 			fontSize: scale(4 / 4),
 			color: "#0D2C54",
 			marginBottom: 0,
 		},
 		h2: {
-			fontFamily: ["Raleway", "Oxygen"].join(","),
+			fontFamily: ["Bitter", "Oxygen"].join(","),
 			fontSize: scale(3 / 4),
 			color: "#0D2C54",
 			marginBottom: 0,
 		},
 		h3: {
-			fontFamily: ["Raleway", "Oxygen"].join(","),
+			fontFamily: ["Bitter", "Oxygen"].join(","),
 			fontSize: scale(2 / 4),
 			color: "#0D2C54",
 			marginBottom: 0,
 		},
 		h4: {
-			fontFamily: ["Raleway", "Oxygen"].join(","),
+			fontFamily: ["Bitter", "Oxygen"].join(","),
 			fontSize: scale(1 / 6),
 			color: "#0D2C54",
 			marginBottom: 0,
 		},
 		h5: {
-			fontFamily: ["Raleway", "Oxygen"].join(","),
+			fontFamily: ["Bitter", "Oxygen"].join(","),
 			fontSize: scale(-1 / 6),
 			color: "#0D2C54",
 			marginBottom: 0,
 		},
 		h6: {
-			fontFamily: ["Raleway", "Oxygen"].join(","),
+			fontFamily: ["Bitter", "Oxygen"].join(","),
 			fontSize: scale(-2 / 6),
 			color: "#0D2C54",
 			marginBottom: 0,

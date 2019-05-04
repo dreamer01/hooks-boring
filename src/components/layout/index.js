@@ -9,9 +9,9 @@ const Wrapper = styled.div`
 	flex: 1;
 	min-height: 100vh;
 	flex-direction: column;
-	max-width: 800px;
+	max-width: 900px;
 	margin: auto;
-	@media (max-width: 900px) {
+	@media (max-width: 1000px) {
 		margin: 10px 25px;
 	}
 `;

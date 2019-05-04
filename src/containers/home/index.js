@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
+import Helmet from "react-helmet";
 import { Link } from "react-router-dom";
 
 import Layout from "../../components/layout";
@@ -44,6 +45,13 @@ export default () => {
 	return (
 		<>
 			<Layout>
+				<Helmet>
+					<title>What2Do</title>
+					<meta
+						name="description"
+						content="Lets find you an activity to do and use that time of yours fruitfully."
+					/>
+				</Helmet>
 				<Conatiner>
 					<ActionGroup>
 						<Link to="/where">
