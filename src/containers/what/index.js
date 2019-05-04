@@ -40,7 +40,6 @@ export default ({ data }) => {
 				content_type: "category",
 			})
 			.then(entries => {
-				console.log(entries.items);
 				setCategories(entries.items);
 			});
 	}, [indoor]);

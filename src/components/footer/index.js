@@ -9,7 +9,11 @@ const Wrapper = styled.div`
 export default () => {
 	return (
 		<Wrapper>
-			<p>Copyright &copy; 2019. Pushpendra Singh. All rights reserved.</p>
+			<p>
+				Copyright &copy; 2019.{" "}
+				<a href="https://www.twitter.com/stud2design">Pushpendra Singh</a>. All
+				rights reserved.
+			</p>
 		</Wrapper>
 	);
 };

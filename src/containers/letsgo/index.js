@@ -10,13 +10,17 @@ var contentful = require("contentful");
 const Conatiner = styled.div`
 	flex: 1;
 	display: flex;
+	flex-direction: column;
 	width: 100%;
 	align-items: center;
 	justify-content: space-around;
 `;
 
 const FeatureImg = styled.img`
+	width: 80%;
 	height: 150px;
+	border-radius: 5px;
+	object-fit: cover;
 `;
 
 const Icon = styled.img`
@@ -37,7 +41,6 @@ export default ({ data }) => {
 		client
 			.getEntry(activity)
 			.then(entry => {
-				console.log(entry);
 				setSelected(entry);
 			})
 			.catch(error => console.log(error));
