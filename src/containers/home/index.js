@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import styled from "styled-components";
 import Helmet from "react-helmet";
 import { Link } from "react-router-dom";
@@ -7,7 +7,7 @@ import Layout from "../../components/layout";
 import DownArrow from "../../assets/icons/down-arrow.svg";
 import AloneSvg from "../../assets/images/alone.svg";
 import CompanySvg from "../../assets/images/company.svg";
-import { MultiplayerContext } from "../app";
+import useLocalStorage from "../../hooks/useLocalStorage";
 
 const Conatiner = styled.div`
 	flex: 1;
@@ -40,7 +40,7 @@ const Action = styled.h2`
 `;
 
 export default () => {
-	const [multiplayer, setMultiplayer] = useContext(MultiplayerContext);
+	const [multiplayer, setMultiplayer] = useLocalStorage("multiplayer", false);
 
 	return (
 		<>

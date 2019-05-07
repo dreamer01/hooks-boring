@@ -7,7 +7,7 @@ import Layout from "../../components/layout";
 import Category from "../../components/category";
 import UpArrow from "../../assets/icons/up-arrow.svg";
 import DownArrow from "../../assets/icons/down-arrow.svg";
-import { IndoorContext, CategoryContext } from "../app";
+import useLocalStorage from "../../hooks/useLocalStorage";
 
 var contentful = require("contentful");
 const Conatiner = styled.div`
@@ -25,8 +25,8 @@ const Icon = styled.img`
 
 export default ({ data }) => {
 	let [categories, setCategories] = useState([]);
-	const [indoor, setIndoor] = useContext(IndoorContext);
-	const [category, setCategory] = useContext(CategoryContext);
+	const [category, setCategory] = useLocalStorage("category", "");
+	const indoor = window.localStorage.getItem("indoor");
 
 	useEffect(() => {
 		const client = contentful.createClient({
@@ -34,7 +34,6 @@ export default ({ data }) => {
 			accessToken:
 				"2585b2432776f2801240a4257fce8d9c9584975557ec8ae312bc5c1acc0593d6",
 		});
-
 		client
 			.getEntries({
 				"fields.indoor": `${indoor}`,

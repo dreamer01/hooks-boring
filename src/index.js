@@ -4,7 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 import { TypographyStyle, GoogleFont } from "react-typography";
 
 import { typography } from "./utils/typograpgy";
-import App from "./containers/app";
+import App from "./containers/app/app.local";
 import * as serviceWorker from "./serviceWorker";
 
 ReactDOM.render(
@@ -15,5 +15,5 @@ ReactDOM.render(
 	</BrowserRouter>,
 	document.getElementById("root")
 );
-serviceWorker.unregister();
-// serviceWorker.register();
+// serviceWorker.unregister();
+serviceWorker.register();

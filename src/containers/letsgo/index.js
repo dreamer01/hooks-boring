@@ -1,11 +1,10 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Helmet from "react-helmet";
 import { Link } from "react-router-dom";
 
 import Layout from "../../components/layout";
 import UpArrow from "../../assets/icons/up-arrow.svg";
-import { ActivityContext } from "../app";
 
 var contentful = require("contentful");
 const Conatiner = styled.div`
@@ -29,8 +28,8 @@ const Icon = styled.img`
 `;
 
 export default ({ data }) => {
-	const [activity, setActivity] = useContext(ActivityContext);
 	const [selected, setSelected] = useState(null);
+	const activity = JSON.parse(window.localStorage.getItem("activity"));
 
 	useEffect(() => {
 		const client = contentful.createClient({
@@ -45,7 +44,7 @@ export default ({ data }) => {
 				setSelected(entry);
 			})
 			.catch(error => console.log(error));
-	}, [activity]);
+	}, [activity.sys.id]);
 
 	return (
 		<Layout>

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import styled from "styled-components";
 import Helmet from "react-helmet";
 import { Link } from "react-router-dom";
@@ -8,7 +8,7 @@ import UpArrow from "../../assets/icons/up-arrow.svg";
 import DownArrow from "../../assets/icons/down-arrow.svg";
 import Romm from "../../assets/images/room.svg";
 import Hangout from "../../assets/images/hangout.svg";
-import { IndoorContext } from "../app";
+import useLocalStorage from "../../hooks/useLocalStorage";
 
 const Conatiner = styled.div`
 	flex: 1;
@@ -41,7 +41,7 @@ const Action = styled.h2`
 `;
 
 export default () => {
-	const [indoor, setIndoor] = useContext(IndoorContext);
+	const [indoor, setIndoor] = useLocalStorage("indoor", false);
 
 	return (
 		<div>

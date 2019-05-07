@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Helmet from "react-helmet";
 import { Link } from "react-router-dom";
@@ -7,7 +7,7 @@ import Layout from "../../components/layout";
 import Activity from "../../components/category";
 import UpArrow from "../../assets/icons/up-arrow.svg";
 import DownArrow from "../../assets/icons/down-arrow.svg";
-import { MultiplayerContext, CategoryContext, ActivityContext } from "../app";
+import useLocalStorage from "../../hooks/useLocalStorage";
 
 var contentful = require("contentful");
 const Conatiner = styled.div`
@@ -25,9 +25,9 @@ const Icon = styled.img`
 
 export default ({ data }) => {
 	const [activities, setActivities] = useState([]);
-	const [multiplayer, setMultiplayer] = useContext(MultiplayerContext);
-	const [category, setCategory] = useContext(CategoryContext);
-	const [activity, setActivity] = useContext(ActivityContext);
+	const [activity, setActivity] = useLocalStorage("activity", "");
+	const multiplayer = JSON.parse(window.localStorage.getItem("multiplayer"));
+	const category = JSON.parse(window.localStorage.getItem("category"));
 
 	useEffect(() => {
 		const client = contentful.createClient({
@@ -35,7 +35,6 @@ export default ({ data }) => {
 			accessToken:
 				"2585b2432776f2801240a4257fce8d9c9584975557ec8ae312bc5c1acc0593d6",
 		});
-		console.log(category.fields.title);
 
 		const options = multiplayer
 			? {
@@ -49,7 +48,7 @@ export default ({ data }) => {
 			  };
 
 		client.getEntries(options).then(entries => setActivities(entries.items));
-	}, [multiplayer, category]);
+	}, [multiplayer, category.sys.id]);
 
 	return (
 		<Layout>
