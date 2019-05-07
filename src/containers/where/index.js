@@ -4,8 +4,6 @@ import Helmet from "react-helmet";
 import { Link } from "react-router-dom";
 
 import Layout from "../../components/layout";
-import UpArrow from "../../assets/icons/up-arrow.svg";
-import DownArrow from "../../assets/icons/down-arrow.svg";
 import Romm from "../../assets/images/room.svg";
 import Hangout from "../../assets/images/hangout.svg";
 import useLocalStorage from "../../hooks/useLocalStorage";
@@ -30,9 +28,6 @@ const ActionImg = styled.img`
 const ActionGroup = styled.div`
 	text-align: center;
 `;
-const Icon = styled.img`
-	height: ${props => (props.size === "small" ? "25px" : "25px")};
-`;
 
 const Action = styled.h2`
 	@media (max-width: 400px) {
@@ -50,24 +45,28 @@ export default () => {
 					<title>Where we heading ?</title>
 					<meta name="description" content="Where you are comfortable." />
 				</Helmet>
-				<Link to="/">
-					<Icon src={UpArrow} />
-				</Link>
 				<Conatiner>
 					<ActionGroup>
 						<Link to="/what">
-							<ActionImg onClick={() => setIndoor(true)} src={Romm} />
+							<ActionImg
+								onClick={() => setIndoor(true)}
+								src={Romm}
+								alt="At Home"
+							/>
 						</Link>
 						<Action>At The Apartment</Action>
 					</ActionGroup>
 					<ActionGroup>
 						<Link to="/what">
-							<ActionImg onClick={() => setIndoor(false)} src={Hangout} />
+							<ActionImg
+								onClick={() => setIndoor(false)}
+								src={Hangout}
+								alt="Hangout"
+							/>
 						</Link>
 						<Action>No, Wanna Hangout</Action>
 					</ActionGroup>
 				</Conatiner>
-				<Icon src={DownArrow} />
 			</Layout>
 		</div>
 	);

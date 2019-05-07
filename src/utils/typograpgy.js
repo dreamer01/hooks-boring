@@ -21,14 +21,14 @@ const customTypography = {
 	overrideStyles: ({ adjustFontSizeTo, scale, rhythm }, options) => ({
 		body: {
 			color: "#0D2C54",
-			backgroundColor: "#f2fef6",
+			backgroundColor: "#FDF9F8",
 			//color: "#fff",
 		},
 		p: {
 			marginBottom: 0,
 		},
 		a: {
-			color: "#1ab394",
+			color: "#94324A",
 			textDecoration: "none",
 		},
 		h1: {

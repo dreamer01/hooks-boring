@@ -4,7 +4,6 @@ import Helmet from "react-helmet";
 import { Link } from "react-router-dom";
 
 import Layout from "../../components/layout";
-import DownArrow from "../../assets/icons/down-arrow.svg";
 import AloneSvg from "../../assets/images/alone.svg";
 import CompanySvg from "../../assets/images/company.svg";
 import useLocalStorage from "../../hooks/useLocalStorage";
@@ -55,7 +54,11 @@ export default () => {
 				<Conatiner>
 					<ActionGroup>
 						<Link to="/where">
-							<ActionImg onClick={() => setMultiplayer(false)} src={AloneSvg} />
+							<ActionImg
+								onClick={() => setMultiplayer(false)}
+								src={AloneSvg}
+								alt="Alone"
+							/>
 						</Link>
 						<Action>You All Alone</Action>
 					</ActionGroup>
@@ -64,12 +67,12 @@ export default () => {
 							<ActionImg
 								onClick={() => setMultiplayer(true)}
 								src={CompanySvg}
+								alt="With Friends"
 							/>
 						</Link>
 						<Action>No, Got Company</Action>
 					</ActionGroup>
 				</Conatiner>
-				<Icon src={DownArrow} />
 			</Layout>
 		</>
 	);

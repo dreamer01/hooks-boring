@@ -53,7 +53,7 @@ export default ({ data }) => {
 				<meta name="description" content="Where you are comfortable." />
 			</Helmet>
 			<Link to="/what">
-				<Icon src={UpArrow} />
+				<Icon src={UpArrow} alt="Prev" />
 			</Link>
 			<Conatiner>
 				{selected && (

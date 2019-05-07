@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 import Layout from "../../components/layout";
 import Activity from "../../components/category";
 import UpArrow from "../../assets/icons/up-arrow.svg";
-import DownArrow from "../../assets/icons/down-arrow.svg";
 import useLocalStorage from "../../hooks/useLocalStorage";
 
 var contentful = require("contentful");
@@ -60,7 +59,7 @@ export default ({ data }) => {
 				</noscript>
 			</Helmet>
 			<Link to="/what">
-				<Icon src={UpArrow} />
+				<Icon src={UpArrow} alt="prev" />
 			</Link>
 			<Conatiner>
 				{activities.map(activity => (
@@ -76,7 +75,6 @@ export default ({ data }) => {
 					</Link>
 				))}
 			</Conatiner>
-			<Icon src={DownArrow} />
 		</Layout>
 	);
 };

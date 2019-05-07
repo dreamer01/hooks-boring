@@ -1,12 +1,10 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import Helmet from "react-helmet";
 
 import Layout from "../../components/layout";
 import Category from "../../components/category";
-import UpArrow from "../../assets/icons/up-arrow.svg";
-import DownArrow from "../../assets/icons/down-arrow.svg";
 import useLocalStorage from "../../hooks/useLocalStorage";
 
 var contentful = require("contentful");
@@ -17,10 +15,6 @@ const Conatiner = styled.div`
 	width: 100%;
 	align-items: center;
 	justify-content: space-around;
-`;
-
-const Icon = styled.img`
-	height: ${props => (props.size === "small" ? "25px" : "25px")};
 `;
 
 export default ({ data }) => {
@@ -53,9 +47,7 @@ export default ({ data }) => {
 					content="What you are interested to do today."
 				/>
 			</Helmet>
-			<Link to="/where">
-				<Icon src={UpArrow} />
-			</Link>
+
 			<Conatiner>
 				{categories &&
 					categories.map(category => (
@@ -71,7 +63,6 @@ export default ({ data }) => {
 						</Link>
 					))}
 			</Conatiner>
-			<Icon src={DownArrow} />
 		</Layout>
 	);
 };
