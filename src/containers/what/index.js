@@ -5,6 +5,7 @@ import Helmet from "react-helmet";
 
 import Layout from "../../components/layout";
 import Category from "../../components/category";
+import Loader from "../../components/loader";
 import useLocalStorage from "../../hooks/useLocalStorage";
 
 var contentful = require("contentful");
@@ -18,7 +19,7 @@ const Conatiner = styled.div`
 `;
 
 export default ({ data }) => {
-	let [categories, setCategories] = useState([]);
+	const [categories, setCategories] = useState(null);
 	const [category, setCategory] = useLocalStorage("category", "");
 	const indoor = window.localStorage.getItem("indoor");
 
@@ -49,7 +50,7 @@ export default ({ data }) => {
 			</Helmet>
 
 			<Conatiner>
-				{categories &&
+				{categories ? (
 					categories.map(category => (
 						<Link
 							onClick={() => setCategory(category)}
@@ -61,7 +62,10 @@ export default ({ data }) => {
 								title={category.fields.title}
 							/>
 						</Link>
-					))}
+					))
+				) : (
+					<Loader />
+				)}
 			</Conatiner>
 		</Layout>
 	);

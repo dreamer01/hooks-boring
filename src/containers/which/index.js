@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 
 import Layout from "../../components/layout";
 import Activity from "../../components/category";
+import Loader from "../../components/loader";
 import UpArrow from "../../assets/icons/up-arrow.svg";
 import useLocalStorage from "../../hooks/useLocalStorage";
 
@@ -23,7 +24,7 @@ const Icon = styled.img`
 `;
 
 export default ({ data }) => {
-	const [activities, setActivities] = useState([]);
+	const [activities, setActivities] = useState(null);
 	const [activity, setActivity] = useLocalStorage("activity", "");
 	const multiplayer = JSON.parse(window.localStorage.getItem("multiplayer"));
 	const category = JSON.parse(window.localStorage.getItem("category"));
@@ -62,18 +63,22 @@ export default ({ data }) => {
 				<Icon src={UpArrow} alt="prev" />
 			</Link>
 			<Conatiner>
-				{activities.map(activity => (
-					<Link
-						onClick={() => setActivity(activity)}
-						key={activity.sys.id}
-						to="/letsgo"
-					>
-						<Activity
-							src={activity.fields.featureImg[0].fields.file.url}
-							title={activity.fields.title}
-						/>
-					</Link>
-				))}
+				{activities ? (
+					activities.map(activity => (
+						<Link
+							onClick={() => setActivity(activity)}
+							key={activity.sys.id}
+							to="/letsgo"
+						>
+							<Activity
+								src={activity.fields.featureImg[0].fields.file.url}
+								title={activity.fields.title}
+							/>
+						</Link>
+					))
+				) : (
+					<Loader />
+				)}
 			</Conatiner>
 		</Layout>
 	);

@@ -4,6 +4,7 @@ import Helmet from "react-helmet";
 import { Link } from "react-router-dom";
 
 import Layout from "../../components/layout";
+import Loader from "../../components/loader";
 import UpArrow from "../../assets/icons/up-arrow.svg";
 
 var contentful = require("contentful");
@@ -56,11 +57,13 @@ export default ({ data }) => {
 				<Icon src={UpArrow} alt="Prev" />
 			</Link>
 			<Conatiner>
-				{selected && (
+				{selected ? (
 					<>
 						<FeatureImg src={selected.fields.featureImg[0].fields.file.url} />
 						<p>{selected.fields.description}</p>{" "}
 					</>
+				) : (
+					<Loader />
 				)}
 			</Conatiner>
 		</Layout>
