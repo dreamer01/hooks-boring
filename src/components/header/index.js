@@ -11,7 +11,7 @@ const Row = styled.div`
 
 const Wrapper = styled(Row)`
 	justify-content: space-between;
-	margin: 10px 0px;
+	margin: 15px 0px;
 `;
 
 const Logo = styled.img`

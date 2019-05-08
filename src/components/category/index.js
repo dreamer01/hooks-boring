@@ -6,6 +6,9 @@ const Wrapper = styled.div`
 	text-align: center;
 	height: 250px;
 	margin: 20px;
+	@media (max-width: 500px) {
+		height: 200px;
+	}
 `;
 
 const Conatiner = styled.div`
@@ -15,6 +18,9 @@ const Conatiner = styled.div`
 	justify-content: center;
 	position: relative;
 	bottom: 100px;
+	@media (max-width: 500px) {
+		width: 150px;
+	}
 `;
 
 const Cover = styled.img`
@@ -25,6 +31,10 @@ const Cover = styled.img`
 	z-index: 1;
 	position: relative;
 	top: 0px;
+	@media (max-width: 500px) {
+		height: 100px;
+		width: 100px;
+	}
 `;
 
 // const Clipped = styled.div`
@@ -43,6 +53,9 @@ const Inner = styled.div`
 	text-align: center;
 	border-radius: 0 0 10px 10px;
 	box-shadow: ${props => props.shadow} 0px 30px 50px -20px;
+	@media (max-width: 500px) {
+		height: 100px;
+	}
 `;
 
 const Shape = styled.svg`
@@ -53,6 +66,9 @@ const Title = styled.h3`
 	color: #fff;
 	padding-top: 50px;
 	margin: 0;
+	@media (max-width: 500px) {
+		font-size: 12px;
+	}
 `;
 
 export default ({ src, title }) => {

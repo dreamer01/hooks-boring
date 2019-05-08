@@ -22,6 +22,7 @@ const FeatureImg = styled.img`
 	height: 150px;
 	border-radius: 5px;
 	object-fit: cover;
+	margin: 20px 0px;
 `;
 
 const Icon = styled.img`
@@ -53,7 +54,7 @@ export default ({ data }) => {
 				<title>{activity.fields.title}</title>
 				<meta name="description" content="Where you are comfortable." />
 			</Helmet>
-			<Link to="/what">
+			<Link to="/which">
 				<Icon src={UpArrow} alt="Prev" />
 			</Link>
 			<Conatiner>
