@@ -28,9 +28,6 @@ const ActionImg = styled.img`
 const ActionGroup = styled.div`
 	text-align: center;
 `;
-const Icon = styled.img`
-	height: ${props => (props.size === "small" ? "25px" : "25px")};
-`;
 
 const Action = styled.h2`
 	@media (max-width: 400px) {
