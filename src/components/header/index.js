@@ -39,7 +39,7 @@ export default () => {
 			<Link to="/">
 				<Row>
 					<Logo src={logo} />
-					<Title>Kya Karen</Title>
+					<Title>What2Do</Title>
 				</Row>
 			</Link>
 			<Link to="/about">
