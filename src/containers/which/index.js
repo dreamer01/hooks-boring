@@ -69,7 +69,7 @@ export default ({ data }) => {
 				<title>{category.fields.title}</title>
 				<meta name="description" content="Where you are comfortable." />
 				<noscript>
-					To display activity list app will require Javascript.
+					To display activity list, the app will require Javascript.
 				</noscript>
 			</Helmet>
 			<Link to="/what">
