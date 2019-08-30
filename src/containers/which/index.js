@@ -29,6 +29,19 @@ export default ({ data }) => {
 	const multiplayer = JSON.parse(window.localStorage.getItem("multiplayer"));
 	const category = JSON.parse(window.localStorage.getItem("category"));
 
+	const renderActivities = activity => (
+		<Link
+			onClick={() => setActivity(activity)}
+			key={activity.sys.id}
+			to="/letsgo"
+		>
+			<Activity
+				src={activity.fields.featureImg[0].fields.file.url}
+				title={activity.fields.title}
+			/>
+		</Link>
+	);
+
 	useEffect(() => {
 		const client = contentful.createClient({
 			space: "xsej5tvgomz6",
@@ -63,22 +76,7 @@ export default ({ data }) => {
 				<Icon src={UpArrow} alt="prev" />
 			</Link>
 			<Conatiner>
-				{activities ? (
-					activities.map(activity => (
-						<Link
-							onClick={() => setActivity(activity)}
-							key={activity.sys.id}
-							to="/letsgo"
-						>
-							<Activity
-								src={activity.fields.featureImg[0].fields.file.url}
-								title={activity.fields.title}
-							/>
-						</Link>
-					))
-				) : (
-					<Loader />
-				)}
+				{activities ? activities.map(renderActivities) : <Loader />}
 			</Conatiner>
 		</Layout>
 	);

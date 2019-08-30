@@ -39,6 +39,19 @@ export default ({ data }) => {
 			});
 	}, [indoor]);
 
+	const renderCategories = category => (
+		<Link
+			onClick={() => setCategory(category)}
+			key={category.sys.id}
+			to="/which"
+		>
+			<Category
+				src={category.fields.featureImg.fields.file.url}
+				title={category.fields.title}
+			/>
+		</Link>
+	);
+
 	return (
 		<Layout>
 			<Helmet>
@@ -50,22 +63,7 @@ export default ({ data }) => {
 			</Helmet>
 
 			<Conatiner>
-				{categories ? (
-					categories.map(category => (
-						<Link
-							onClick={() => setCategory(category)}
-							key={category.sys.id}
-							to="/which"
-						>
-							<Category
-								src={category.fields.featureImg.fields.file.url}
-								title={category.fields.title}
-							/>
-						</Link>
-					))
-				) : (
-					<Loader />
-				)}
+				{categories ? categories.map(renderCategories) : <Loader />}
 			</Conatiner>
 		</Layout>
 	);
