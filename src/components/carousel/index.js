@@ -12,15 +12,14 @@ const Wrapper = styled.div`
 
 const Container = styled.div`
 	display: flex;
-	width: 100%;
-	align-items: center;
+	margin: auto;
 	padding-top: 100px;
 	padding-bottom: 100px;
 	overflow-x: auto;
+	scroll-behavior: smooth;
 	::-webkit-scrollbar {
 		display: none !important;
 	}
-	scroll-behavior: smooth;
 `;
 
 const PrevIcon = styled.img`
