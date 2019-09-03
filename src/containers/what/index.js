@@ -12,6 +12,8 @@ const Content = styled.div`
 	display: flex;
 	flex: 1;
 	width: 100%;
+	justify-content: center;
+	align-items: center;
 `;
 
 export default ({ data }) => {
@@ -58,9 +60,11 @@ export default ({ data }) => {
 				/>
 			</Helmet>
 			<Content>
-				<Carousel>
-					{categories ? categories.map(renderCategories) : <Loader />}
-				</Carousel>
+				{categories ? (
+					<Carousel>{categories.map(renderCategories)}</Carousel>
+				) : (
+					<Loader />
+				)}
 			</Content>
 		</Layout>
 	);

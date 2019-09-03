@@ -17,6 +17,8 @@ const Content = styled.div`
 	display: flex;
 	flex: 1;
 	width: 100%;
+	justify-content: center;
+	align-items: center;
 `;
 
 export default ({ data }) => {
@@ -69,9 +71,11 @@ export default ({ data }) => {
 				</noscript>
 			</Helmet>
 			<Content>
-				<Carousel>
-					{activities ? activities.map(renderActivities) : <Loader />}
-				</Carousel>
+				{activities ? (
+					<Carousel>{activities.map(renderActivities)}</Carousel>
+				) : (
+					<Loader />
+				)}
 			</Content>
 		</Layout>
 	);
