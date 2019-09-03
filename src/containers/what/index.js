@@ -3,19 +3,14 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import Helmet from "react-helmet";
 
-import Layout from "../../components/layout";
-import Category from "../../components/category";
-import Loader from "../../components/loader";
+import { Layout, Carousel, Category, Loader } from "../../components";
 import useLocalStorage from "../../hooks/useLocalStorage";
 
 var contentful = require("contentful");
-const Conatiner = styled.div`
-	flex: 1;
+
+const Content = styled.div`
 	display: flex;
-	flex-wrap: wrap;
-	width: 100%;
-	align-items: center;
-	justify-content: space-around;
+	flex: 1;
 `;
 
 export default ({ data }) => {
@@ -61,10 +56,11 @@ export default ({ data }) => {
 					content="What you are interested to do today."
 				/>
 			</Helmet>
-
-			<Conatiner>
-				{categories ? categories.map(renderCategories) : <Loader />}
-			</Conatiner>
+			<Content>
+				<Carousel>
+					{categories ? categories.map(renderCategories) : <Loader />}
+				</Carousel>
+			</Content>
 		</Layout>
 	);
 };

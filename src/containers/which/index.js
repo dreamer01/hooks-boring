@@ -3,24 +3,20 @@ import styled from "styled-components";
 import Helmet from "react-helmet";
 import { Link } from "react-router-dom";
 
-import Layout from "../../components/layout";
-import Activity from "../../components/category";
-import Loader from "../../components/loader";
-import UpArrow from "../../assets/icons/up-arrow.svg";
+import {
+	Layout,
+	Category as Activity,
+	Loader,
+	Carousel,
+} from "../../components";
 import useLocalStorage from "../../hooks/useLocalStorage";
 
 var contentful = require("contentful");
-const Conatiner = styled.div`
-	flex: 1;
-	display: flex;
-	flex-wrap: wrap;
-	width: 100%;
-	align-items: center;
-	justify-content: space-around;
-`;
 
-const Icon = styled.img`
-	height: ${props => (props.size === "small" ? "25px" : "25px")};
+const Content = styled.div`
+	display: flex;
+	flex: 1;
+	width: 100%;
 `;
 
 export default ({ data }) => {
@@ -72,12 +68,11 @@ export default ({ data }) => {
 					To display activity list, the app will require Javascript.
 				</noscript>
 			</Helmet>
-			<Link to="/what">
-				<Icon src={UpArrow} alt="prev" />
-			</Link>
-			<Conatiner>
-				{activities ? activities.map(renderActivities) : <Loader />}
-			</Conatiner>
+			<Content>
+				<Carousel>
+					{activities ? activities.map(renderActivities) : <Loader />}
+				</Carousel>
+			</Content>
 		</Layout>
 	);
 };
