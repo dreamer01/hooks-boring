@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Helmet from "react-helmet";
-import { Link } from "react-router-dom";
 
 import Layout from "../../components/layout";
 import Loader from "../../components/loader";
-import UpArrow from "../../assets/icons/up-arrow.svg";
 
 var contentful = require("contentful");
 const Conatiner = styled.div`
@@ -23,10 +21,6 @@ const FeatureImg = styled.img`
 	border-radius: 5px;
 	object-fit: cover;
 	margin: 20px 0px;
-`;
-
-const Icon = styled.img`
-	height: ${props => (props.size === "small" ? "25px" : "25px")};
 `;
 
 export default ({ data }) => {
@@ -54,9 +48,6 @@ export default ({ data }) => {
 				<title>{activity.fields.title}</title>
 				<meta name="description" content="Where you are comfortable." />
 			</Helmet>
-			<Link to="/which">
-				<Icon src={UpArrow} alt="Prev" />
-			</Link>
 			<Conatiner>
 				{selected ? (
 					<>
