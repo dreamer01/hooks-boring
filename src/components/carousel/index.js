@@ -14,8 +14,8 @@ const Container = styled.div`
 	display: flex;
 	width: 100%;
 	align-items: center;
-	padding-top: 50px;
-	padding-bottom: 50px;
+	padding-top: 100px;
+	padding-bottom: 100px;
 	overflow-x: auto;
 	::-webkit-scrollbar {
 		display: none !important;

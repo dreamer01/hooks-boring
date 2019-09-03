@@ -11,6 +11,7 @@ var contentful = require("contentful");
 const Content = styled.div`
 	display: flex;
 	flex: 1;
+	width: 100%;
 `;
 
 export default ({ data }) => {

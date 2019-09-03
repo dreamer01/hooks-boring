@@ -19,7 +19,7 @@ const Conatiner = styled.div`
 	position: relative;
 	bottom: 100px;
 	@media (max-width: 500px) {
-		width: 150px;
+		width: 200px;
 	}
 `;
 
@@ -32,8 +32,8 @@ const Cover = styled.img`
 	position: relative;
 	top: 0px;
 	@media (max-width: 500px) {
-		height: 100px;
-		width: 100px;
+		height: 150px;
+		width: 150px;
 	}
 `;
 
@@ -54,7 +54,7 @@ const Inner = styled.div`
 	border-radius: 0 0 10px 10px;
 	box-shadow: ${props => props.shadow} 0px 30px 50px -20px;
 	@media (max-width: 500px) {
-		height: 100px;
+		height: 125px;
 	}
 `;
 
@@ -66,9 +66,6 @@ const Title = styled.h3`
 	color: #fff;
 	padding-top: 50px;
 	margin: 0;
-	@media (max-width: 500px) {
-		font-size: 12px;
-	}
 `;
 
 export default ({ src, title }) => {
