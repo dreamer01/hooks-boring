@@ -1,12 +1,19 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Helmet from "react-helmet";
+import {
+	TwitterShareButton,
+	FacebookShareButton,
+	WhatsappShareButton,
+} from "react-share";
 
 import client from "../../utils/contentful";
 import { Layout, Loader } from "../../components";
 import ExternalLink from "../../assets/icons/external-link.svg";
 import User from "../../assets/icons/user.svg";
 import Twitter from "../../assets/icons/twitter.svg";
+import Facebook from "../../assets/icons/facebook.svg";
+import Whatsapp from "../../assets/icons/whatsapp.svg";
 
 const Conatiner = styled.div`
 	flex: 1;
@@ -24,20 +31,22 @@ const Row = styled.div`
 
 const Details = styled.div`
 	display: flex;
+	width: 100%;
 `;
 
 const Info = styled.div`
 	display: flex;
+	flex: 1;
 	flex-direction: column;
 	justify-content: space-between;
 	align-items: flex-start;
-	width: 50%;
+	margin-left: 50px;
 `;
 
 const FeatureImg = styled.img`
-	width: 40%;
+	height: 225px;
 	border-radius: 2px;
-	object-fit: cover;
+	object-fit: contain;
 `;
 
 const Title = styled.h3`
@@ -45,8 +54,17 @@ const Title = styled.h3`
 `;
 
 const LinkIcon = styled.img`
-	height: ${props => (props.size === "small" ? "15px" : "25px")};
+	height: 15px;
 	margin-left: 10px;
+`;
+
+const ShareIcon = styled.img`
+	height: 25px;
+	margin-left: 15px;
+	cursor: pointer;
+	&:hover {
+		opacity: 0.8;
+	}
 `;
 
 const TagsGroup = styled.div`
@@ -60,7 +78,7 @@ const Tag = styled.div`
 	border-radius: 50px;
 `;
 
-export default ({ data }) => {
+const Letsgo = ({ data, history }) => {
 	const [selected, setSelected] = useState(null);
 	const activity = JSON.parse(window.localStorage.getItem("activity"));
 
@@ -88,37 +106,57 @@ export default ({ data }) => {
 			<Conatiner>
 				{selected ? (
 					<>
-						<div>
-							<Details>
-								<div>
-									<FeatureImg
-										src={selected.fields.featureImg[0].fields.file.url}
-									/>
-								</div>
-								<Info>
-									<Row>
-										<h3> Used By {selected.fields.usedBy}</h3>
-										<LinkIcon size="small" src={User} alt="User" />
-									</Row>
-									<Row>
-										<a
-											target="_blank"
-											rel="noopener noreferrer"
-											href={selected.fields.links[0]}
-										>
+						<Details>
+							<FeatureImg src={selected.fields.featureImg[0].fields.file.url} />
+							<Info>
+								<Row>
+									<h3> Used By {selected.fields.usedBy}</h3>
+									<LinkIcon size="small" src={User} alt="User" />
+								</Row>
+								{!!selected.fields.links && (
+									<a
+										target="_blank"
+										rel="noopener noreferrer"
+										href={selected.fields.links[0]}
+									>
+										<Row>
 											<h3>Try Now</h3>
-										</a>
-										<LinkIcon size="small" src={ExternalLink} alt="Open Link" />
-									</Row>
-									<Row>
-										<h3>Spread Fun</h3>
-										<LinkIcon src={Twitter} alt="Tweet" />
-									</Row>
-									<TagsGroup>{selected.fields.tags.map(renderTags)}</TagsGroup>
-								</Info>
-							</Details>
-							<Title>{selected.fields.title}</Title>
-						</div>
+											<LinkIcon
+												size="small"
+												src={ExternalLink}
+												alt="Open Link"
+											/>
+										</Row>
+									</a>
+								)}
+								<Row>
+									<h3>Spread Fun</h3>
+									<TwitterShareButton
+										url="https://what2do.netlify.com"
+										title={`I will be busy with activity ${selected.fields.title}, find what you can do with your time at`}
+										hashtags={selected.fields.tags}
+									>
+										<ShareIcon src={Twitter} alt="Tweet" />
+									</TwitterShareButton>
+									<FacebookShareButton
+										url="https://what2do.netlify.com"
+										quote={`I will be busy with activity ${selected.fields.title}, find what you can do with your time at https://what2do.netlify.com \n`}
+										hashtags={selected.fields.tags}
+									>
+										<ShareIcon src={Facebook} alt="Tweet" />
+									</FacebookShareButton>
+									<WhatsappShareButton
+										url="https://what2do.netlify.com"
+										title={`I will be busy with activity ${selected.fields.title}, find what you can do with your time at`}
+										separator=" 👉 "
+									>
+										<ShareIcon src={Whatsapp} alt="Tweet" />
+									</WhatsappShareButton>
+								</Row>
+								<TagsGroup>{selected.fields.tags.map(renderTags)}</TagsGroup>
+							</Info>
+						</Details>
+						<Title>{selected.fields.title}</Title>
 						<p>{selected.fields.description}</p>
 					</>
 				) : (
@@ -128,3 +166,5 @@ export default ({ data }) => {
 		</Layout>
 	);
 };
+
+export default Letsgo;
