@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import ReactGA from "react-ga";
 
-ReactGA.initialize("UA-139866320-1", { debug: true });
+ReactGA.initialize("UA-139866320-1", { debug: false });
 
 const withTracker = (WrappedComponent, options = {}) => {
 	const trackPage = page => {

@@ -3,24 +3,21 @@ import styled from "styled-components";
 import Helmet from "react-helmet";
 import { Link } from "react-router-dom";
 
-import Layout from "../../components/layout";
-import Activity from "../../components/category";
-import Loader from "../../components/loader";
-import UpArrow from "../../assets/icons/up-arrow.svg";
+import client from "../../utils/contentful";
 import useLocalStorage from "../../hooks/useLocalStorage";
+import {
+	Layout,
+	Category as Activity,
+	Loader,
+	Carousel,
+} from "../../components";
 
-var contentful = require("contentful");
-const Conatiner = styled.div`
-	flex: 1;
+const Content = styled.div`
 	display: flex;
-	flex-wrap: wrap;
+	flex: 1;
 	width: 100%;
+	justify-content: center;
 	align-items: center;
-	justify-content: space-around;
-`;
-
-const Icon = styled.img`
-	height: ${props => (props.size === "small" ? "25px" : "25px")};
 `;
 
 export default ({ data }) => {
@@ -38,17 +35,12 @@ export default ({ data }) => {
 			<Activity
 				src={activity.fields.featureImg[0].fields.file.url}
 				title={activity.fields.title}
+				isCategory={false}
 			/>
 		</Link>
 	);
 
 	useEffect(() => {
-		const client = contentful.createClient({
-			space: "xsej5tvgomz6",
-			accessToken:
-				"2585b2432776f2801240a4257fce8d9c9584975557ec8ae312bc5c1acc0593d6",
-		});
-
 		const options = multiplayer
 			? {
 					"fields.category.sys.id": `${category.sys.id}`,
@@ -69,15 +61,16 @@ export default ({ data }) => {
 				<title>{category.fields.title}</title>
 				<meta name="description" content="Where you are comfortable." />
 				<noscript>
-					To display activity list app will require Javascript.
+					To display activity list, the app will require Javascript.
 				</noscript>
 			</Helmet>
-			<Link to="/what">
-				<Icon src={UpArrow} alt="prev" />
-			</Link>
-			<Conatiner>
-				{activities ? activities.map(renderActivities) : <Loader />}
-			</Conatiner>
+			<Content>
+				{activities ? (
+					<Carousel>{activities.map(renderActivities)}</Carousel>
+				) : (
+					<Loader />
+				)}
+			</Content>
 		</Layout>
 	);
 };

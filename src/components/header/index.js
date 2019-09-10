@@ -38,7 +38,7 @@ export default () => {
 		<Wrapper>
 			<Link to="/">
 				<Row>
-					<Logo src={logo} />
+					<Logo src={logo} alt="What2Do Logo" />
 					<Title>What2Do</Title>
 				</Row>
 			</Link>

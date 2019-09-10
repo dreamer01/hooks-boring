@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import PropTypes from "prop-types";
 import styled from "styled-components";
 import ImagePalette from "react-image-palette";
 
@@ -19,33 +20,30 @@ const Conatiner = styled.div`
 	position: relative;
 	bottom: 100px;
 	@media (max-width: 500px) {
+		width: 200px;
+	}
+`;
+
+const CoverView = styled.div`
+	height: 150px;
+	width: 150px;
+	margin: auto;
+	border-radius: 5px;
+	z-index: 1;
+	position: relative;
+	overflow: hidden;
+	// top: 20px;
+	@media (max-width: 500px) {
+		height: 150px;
 		width: 150px;
 	}
 `;
 
 const Cover = styled.img`
-	height: 150px;
-	width: 150px;
-	object-fit: cover;
-	border-radius: 10px;
-	z-index: 1;
-	position: relative;
-	top: 0px;
-	@media (max-width: 500px) {
-		height: 100px;
-		width: 100px;
-	}
+	width: 100%;
+	height: 100%;
+	object-fit: ${props => (props.isCategory ? "conatin" : "cover")};
 `;
-
-// const Clipped = styled.div`
-// 	position: relative;
-// 	bottom: 50px;
-// 	height: 200px;
-// 	width: 100%;
-// 	background-color: #3768fa;
-// 	clip-path: polygon(0 30%, 100% 00%, 100% 100%, 0% 100%);
-// 	border-radius: 10px;
-// `;
 
 const Inner = styled.div`
 	height: 125px;
@@ -54,7 +52,7 @@ const Inner = styled.div`
 	border-radius: 0 0 10px 10px;
 	box-shadow: ${props => props.shadow} 0px 30px 50px -20px;
 	@media (max-width: 500px) {
-		height: 100px;
+		height: 125px;
 	}
 `;
 
@@ -66,17 +64,16 @@ const Title = styled.h3`
 	color: #fff;
 	padding-top: 50px;
 	margin: 0;
-	@media (max-width: 500px) {
-		font-size: 12px;
-	}
 `;
 
-export default ({ src, title }) => {
+const Card = ({ src, title, isCategory }) => {
 	useEffect(() => {}, []);
 
 	return (
 		<Wrapper>
-			<Cover src={src} alt="Category" />
+			<CoverView>
+				<Cover isCategory={isCategory} src={src} alt="Category" />
+			</CoverView>
 
 			<ImagePalette crossOrigin={true} image={src}>
 				{({ backgroundColor, color, alternativeColor }) => (
@@ -102,3 +99,17 @@ export default ({ src, title }) => {
 		</Wrapper>
 	);
 };
+
+Card.propTypes = {
+	src: PropTypes.string,
+	title: PropTypes.string,
+	isCategory: PropTypes.bool,
+};
+
+Card.defaultProps = {
+	src: "",
+	title: "",
+	isCategory: true,
+};
+
+export default Card;

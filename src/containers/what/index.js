@@ -3,19 +3,16 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import Helmet from "react-helmet";
 
-import Layout from "../../components/layout";
-import Category from "../../components/category";
-import Loader from "../../components/loader";
+import client from "../../utils/contentful";
 import useLocalStorage from "../../hooks/useLocalStorage";
+import { Layout, Carousel, Category, Loader } from "../../components";
 
-var contentful = require("contentful");
-const Conatiner = styled.div`
-	flex: 1;
+const Content = styled.div`
 	display: flex;
-	flex-wrap: wrap;
+	flex: 1;
 	width: 100%;
+	justify-content: center;
 	align-items: center;
-	justify-content: space-around;
 `;
 
 export default ({ data }) => {
@@ -24,11 +21,6 @@ export default ({ data }) => {
 	const indoor = window.localStorage.getItem("indoor");
 
 	useEffect(() => {
-		const client = contentful.createClient({
-			space: "xsej5tvgomz6",
-			accessToken:
-				"2585b2432776f2801240a4257fce8d9c9584975557ec8ae312bc5c1acc0593d6",
-		});
 		client
 			.getEntries({
 				"fields.indoor": `${indoor}`,
@@ -61,10 +53,13 @@ export default ({ data }) => {
 					content="What you are interested to do today."
 				/>
 			</Helmet>
-
-			<Conatiner>
-				{categories ? categories.map(renderCategories) : <Loader />}
-			</Conatiner>
+			<Content>
+				{categories ? (
+					<Carousel>{categories.map(renderCategories)}</Carousel>
+				) : (
+					<Loader />
+				)}
+			</Content>
 		</Layout>
 	);
 };
