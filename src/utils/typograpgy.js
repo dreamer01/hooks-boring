@@ -27,6 +27,9 @@ const customTypography = {
 		p: {
 			marginBottom: 0,
 		},
+		pre: {
+			marginBottom: 0,
+		},
 		a: {
 			color: "#94324A",
 			textDecoration: "none",
