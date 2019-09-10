@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
@@ -39,6 +39,15 @@ const NextIcon = styled.img`
 `;
 
 function Carousel({ children, ...props }) {
+	const [showControls, setShowControls] = useState(true);
+
+	useEffect(() => {
+		const showControls =
+			document.getElementById("carousel").scrollWidth >
+			document.getElementById("carousel-wrapper").clientWidth;
+		setShowControls(showControls);
+	}, [showControls]);
+
 	const handlePrev = event => {
 		event.preventDefault();
 		document.getElementById("carousel").scrollLeft -= 300;
@@ -50,12 +59,16 @@ function Carousel({ children, ...props }) {
 	};
 
 	return (
-		<Wrapper>
-			<PrevIcon onClick={handlePrev} src={UpArrow} alt="prev" />
+		<Wrapper id="carousel-wrapper">
+			{showControls && (
+				<PrevIcon onClick={handlePrev} src={UpArrow} alt="prev" />
+			)}
 			<Container id="carousel" onKeyUp={handlePrev} onKeyDown={handleNext}>
 				{children}
 			</Container>
-			<NextIcon onClick={handleNext} src={UpArrow} alt="next" />
+			{showControls && (
+				<NextIcon onClick={handleNext} src={UpArrow} alt="next" />
+			)}
 		</Wrapper>
 	);
 }
