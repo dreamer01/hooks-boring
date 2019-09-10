@@ -36,6 +36,7 @@ export default ({ data }) => {
 			<Activity
 				src={activity.fields.featureImg[0].fields.file.url}
 				title={activity.fields.title}
+				isCategory={false}
 			/>
 		</Link>
 	);
