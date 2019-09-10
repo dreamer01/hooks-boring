@@ -3,15 +3,14 @@ import styled from "styled-components";
 import Helmet from "react-helmet";
 import { Link } from "react-router-dom";
 
+import client from "../../utils/contentful";
+import useLocalStorage from "../../hooks/useLocalStorage";
 import {
 	Layout,
 	Category as Activity,
 	Loader,
 	Carousel,
 } from "../../components";
-import useLocalStorage from "../../hooks/useLocalStorage";
-
-var contentful = require("contentful");
 
 const Content = styled.div`
 	display: flex;
@@ -42,12 +41,6 @@ export default ({ data }) => {
 	);
 
 	useEffect(() => {
-		const client = contentful.createClient({
-			space: "xsej5tvgomz6",
-			accessToken:
-				"2585b2432776f2801240a4257fce8d9c9584975557ec8ae312bc5c1acc0593d6",
-		});
-
 		const options = multiplayer
 			? {
 					"fields.category.sys.id": `${category.sys.id}`,

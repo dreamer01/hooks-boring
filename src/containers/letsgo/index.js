@@ -2,10 +2,9 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Helmet from "react-helmet";
 
-import Layout from "../../components/layout";
-import Loader from "../../components/loader";
+import client from "../../utils/contentful";
+import { Layout, Loader } from "../../components";
 
-var contentful = require("contentful");
 const Conatiner = styled.div`
 	flex: 1;
 	display: flex;
@@ -28,12 +27,6 @@ export default ({ data }) => {
 	const activity = JSON.parse(window.localStorage.getItem("activity"));
 
 	useEffect(() => {
-		const client = contentful.createClient({
-			space: "xsej5tvgomz6",
-			accessToken:
-				"2585b2432776f2801240a4257fce8d9c9584975557ec8ae312bc5c1acc0593d6",
-		});
-
 		client
 			.getEntry(activity.sys.id)
 			.then(entry => {

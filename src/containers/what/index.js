@@ -3,10 +3,9 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import Helmet from "react-helmet";
 
-import { Layout, Carousel, Category, Loader } from "../../components";
+import client from "../../utils/contentful";
 import useLocalStorage from "../../hooks/useLocalStorage";
-
-var contentful = require("contentful");
+import { Layout, Carousel, Category, Loader } from "../../components";
 
 const Content = styled.div`
 	display: flex;
@@ -22,11 +21,6 @@ export default ({ data }) => {
 	const indoor = window.localStorage.getItem("indoor");
 
 	useEffect(() => {
-		const client = contentful.createClient({
-			space: "xsej5tvgomz6",
-			accessToken:
-				"2585b2432776f2801240a4257fce8d9c9584975557ec8ae312bc5c1acc0593d6",
-		});
 		client
 			.getEntries({
 				"fields.indoor": `${indoor}`,
