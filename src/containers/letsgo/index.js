@@ -119,7 +119,6 @@ const Letsgo = ({ data, history }) => {
 			.getEntry(activityId)
 			.then(entry => {
 				setSelected(entry);
-				console.log(entry);
 			})
 			.catch(error => console.log(error));
 	}, [activity, history.location.search]);
