@@ -8,12 +8,15 @@ import {
 } from "react-share";
 
 import client from "../../utils/contentful";
+import { Colors } from "../../theme/styles";
+import {
+	ExternalLink,
+	User,
+	Twitter,
+	Facebook,
+	Whatsapp,
+} from "../../utils/images";
 import { Layout, Loader } from "../../components";
-import ExternalLink from "../../assets/icons/external-link.svg";
-import User from "../../assets/icons/user.svg";
-import Twitter from "../../assets/icons/twitter.svg";
-import Facebook from "../../assets/icons/facebook.svg";
-import Whatsapp from "../../assets/icons/whatsapp.svg";
 
 const Container = styled.div`
 	flex: 1;
@@ -27,7 +30,20 @@ const Container = styled.div`
 const Row = styled.div`
 	display: flex;
 	align-items: center;
+	justify-content: center;
+	flex-wrap: wrap;
 	margin: 10px 0px;
+	&.round {
+		padding: 5px 10px;
+		margin-right: 10px;
+		margin-top: 5px;
+		border: 2px solid ${Colors.content};
+		border-radius: 50px;
+		@media (max-width: 500px) {
+			border: 1px solid ${Colors.content};
+			font-size: 12px;
+		}
+	}
 `;
 
 const Details = styled.div`
@@ -77,23 +93,14 @@ const ShareIcon = styled.img`
 	}
 `;
 
-const TagsGroup = styled.div`
-	display: flex;
-	justify-content: center;
-	flex-wrap: wrap;
-	@media (max-width: 500px) {
-		display: none;
-	}
-`;
-
 const Tag = styled.div`
 	padding: 5px 10px;
 	margin-right: 10px;
 	margin-top: 5px;
-	border: 2px solid teal;
+	border: 2px solid ${Colors.content};
 	border-radius: 50px;
 	@media (max-width: 500px) {
-		border: 1px solid teal;
+		border: 1px solid ${Colors.content};
 		padding: 5px;
 		font-size: 12px;
 	}
@@ -135,7 +142,7 @@ const Letsgo = ({ data, history }) => {
 							<FeatureImg src={selected.fields.featureImg[0].fields.file.url} />
 							<Info>
 								<Row>
-									<Row>
+									<Row className="round">
 										<h3> Used By {selected.fields.usedBy}</h3>
 										<LinkIcon size="small" src={User} alt="User" />
 									</Row>
@@ -145,7 +152,7 @@ const Letsgo = ({ data, history }) => {
 											rel="noopener noreferrer"
 											href={selected.fields.links[0]}
 										>
-											<Row>
+											<Row className="round">
 												<h3 style={{ marginLeft: 10 }}>Try Now</h3>
 												<LinkIcon
 													size="small"
@@ -156,7 +163,7 @@ const Letsgo = ({ data, history }) => {
 										</a>
 									)}
 								</Row>
-								<Row>
+								<Row className="round">
 									<h3>Spread Fun</h3>
 									<TwitterShareButton
 										url={`https://what2do.netlify.com/letsgo?ref=${activity.sys.id}`}
@@ -180,7 +187,7 @@ const Letsgo = ({ data, history }) => {
 										<ShareIcon src={Whatsapp} alt="Tweet" />
 									</WhatsappShareButton>
 								</Row>
-								<TagsGroup>{selected.fields.tags.map(renderTags)}</TagsGroup>
+								<Row>{selected.fields.tags.map(renderTags)}</Row>
 							</Info>
 						</Details>
 						<div>
