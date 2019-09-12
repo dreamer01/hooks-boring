@@ -27,11 +27,15 @@ const Conatiner = styled.div`
 const Row = styled.div`
 	display: flex;
 	align-items: center;
+	margin: 10px 0px;
 `;
 
 const Details = styled.div`
 	display: flex;
 	width: 100%;
+	@media (max-width: 800px) {
+		flex-direction: column;
+	}
 `;
 
 const Info = styled.div`
@@ -41,6 +45,10 @@ const Info = styled.div`
 	justify-content: space-between;
 	align-items: flex-start;
 	margin-left: 50px;
+	@media (max-width: 800px) {
+		align-items: center;
+		margin-left: 0px;
+	}
 `;
 
 const FeatureImg = styled.img`
@@ -69,13 +77,24 @@ const ShareIcon = styled.img`
 
 const TagsGroup = styled.div`
 	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+	@media (max-width: 500px) {
+		display: none;
+	}
 `;
 
 const Tag = styled.div`
 	padding: 5px 10px;
 	margin-right: 10px;
+	margin-top: 5px;
 	border: 2px solid teal;
 	border-radius: 50px;
+	@media (max-width: 500px) {
+		border: 1px solid teal;
+		padding: 5px;
+		font-size: 12px;
+	}
 `;
 
 const Letsgo = ({ data, history }) => {
@@ -110,25 +129,27 @@ const Letsgo = ({ data, history }) => {
 							<FeatureImg src={selected.fields.featureImg[0].fields.file.url} />
 							<Info>
 								<Row>
-									<h3> Used By {selected.fields.usedBy}</h3>
-									<LinkIcon size="small" src={User} alt="User" />
+									<Row>
+										<h3> Used By {selected.fields.usedBy}</h3>
+										<LinkIcon size="small" src={User} alt="User" />
+									</Row>
+									{!!selected.fields.links && (
+										<a
+											target="_blank"
+											rel="noopener noreferrer"
+											href={selected.fields.links[0]}
+										>
+											<Row>
+												<h3>Try Now</h3>
+												<LinkIcon
+													size="small"
+													src={ExternalLink}
+													alt="Open Link"
+												/>
+											</Row>
+										</a>
+									)}
 								</Row>
-								{!!selected.fields.links && (
-									<a
-										target="_blank"
-										rel="noopener noreferrer"
-										href={selected.fields.links[0]}
-									>
-										<Row>
-											<h3>Try Now</h3>
-											<LinkIcon
-												size="small"
-												src={ExternalLink}
-												alt="Open Link"
-											/>
-										</Row>
-									</a>
-								)}
 								<Row>
 									<h3>Spread Fun</h3>
 									<TwitterShareButton
@@ -156,8 +177,10 @@ const Letsgo = ({ data, history }) => {
 								<TagsGroup>{selected.fields.tags.map(renderTags)}</TagsGroup>
 							</Info>
 						</Details>
-						<Title>{selected.fields.title}</Title>
-						<p>{selected.fields.description}</p>
+						<div>
+							<Title>{selected.fields.title}</Title>
+							<p>{selected.fields.description}</p>
+						</div>
 					</>
 				) : (
 					<Loader />
