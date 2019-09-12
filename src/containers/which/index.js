@@ -41,24 +41,26 @@ export default ({ data }) => {
 	);
 
 	useEffect(() => {
-		const options = multiplayer
+		const categoryId = category && category.sys.id;
+		const isMultiplayer = multiplayer || false;
+		const options = isMultiplayer
 			? {
-					"fields.category.sys.id": `${category.sys.id}`,
+					"fields.category.sys.id": `${categoryId}`,
 					content_type: "activity",
 			  }
 			: {
-					"fields.multiplayer": `${multiplayer}`,
-					"fields.category.sys.id": `${category.sys.id}`,
+					"fields.multiplayer": `${isMultiplayer}`,
+					"fields.category.sys.id": `${categoryId}`,
 					content_type: "activity",
 			  };
 
 		client.getEntries(options).then(entries => setActivities(entries.items));
-	}, [multiplayer, category.sys.id]);
+	}, [multiplayer, category]);
 
 	return (
 		<Layout>
 			<Helmet>
-				<title>{category.fields.title}</title>
+				<title>{category ? category.fields.title : "Category"}</title>
 				<meta name="description" content="Where you are comfortable." />
 				<noscript>
 					To display activity list, the app will require Javascript.

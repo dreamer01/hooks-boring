@@ -111,7 +111,7 @@ const Letsgo = ({ data, history }) => {
 	const activity = JSON.parse(window.localStorage.getItem("activity"));
 
 	useEffect(() => {
-		let activityId = activity.sys.id;
+		let activityId = activity && activity.sys.id;
 		if (history.location.search) {
 			activityId = history.location.search.split("=")[1];
 		}
@@ -119,9 +119,10 @@ const Letsgo = ({ data, history }) => {
 			.getEntry(activityId)
 			.then(entry => {
 				setSelected(entry);
+				console.log(entry);
 			})
 			.catch(error => console.log(error));
-	}, [activity.sys.id, history.location.search]);
+	}, [activity, history.location.search]);
 
 	const renderTags = tag => (
 		<Tag key={tag}>
@@ -132,7 +133,7 @@ const Letsgo = ({ data, history }) => {
 	return (
 		<Layout>
 			<Helmet>
-				<title>{activity.fields.title}</title>
+				<title>{selected ? selected.fields.title : "Activity"}</title>
 				<meta name="description" content="Where you are comfortable." />
 			</Helmet>
 			<Container>
@@ -166,21 +167,21 @@ const Letsgo = ({ data, history }) => {
 								<Row className="round">
 									<h3>Spread Fun</h3>
 									<TwitterShareButton
-										url={`https://what2do.netlify.com/letsgo?ref=${activity.sys.id}`}
+										url={`https://what2do.netlify.com/letsgo?ref=${selected.sys.id}`}
 										title={`I will be busy with activity ${selected.fields.title}, find what you can do with your time at`}
 										hashtags={selected.fields.tags}
 									>
 										<ShareIcon src={Twitter} alt="Tweet" />
 									</TwitterShareButton>
 									<FacebookShareButton
-										url={`https://what2do.netlify.com/letsgo?ref=${activity.sys.id}`}
+										url={`https://what2do.netlify.com/letsgo?ref=${selected.sys.id}`}
 										quote={`I will be busy with activity ${selected.fields.title}, find what you can do with your time at https://what2do.netlify.com \n`}
 										hashtags={selected.fields.tags}
 									>
 										<ShareIcon src={Facebook} alt="Tweet" />
 									</FacebookShareButton>
 									<WhatsappShareButton
-										url={`https://what2do.netlify.com/letsgo?ref=${activity.sys.id}`}
+										url={`https://what2do.netlify.com/letsgo?ref=${selected.sys.id}`}
 										title={`I will be busy with activity ${selected.fields.title}, find what you can do with your time at`}
 										separator=" 👉 "
 									>

@@ -21,9 +21,10 @@ export default ({ data }) => {
 	const indoor = window.localStorage.getItem("indoor");
 
 	useEffect(() => {
+		const isIndoor = indoor || true;
 		client
 			.getEntries({
-				"fields.indoor": `${indoor}`,
+				"fields.indoor": `${isIndoor}`,
 				content_type: "category",
 			})
 			.then(entries => {
