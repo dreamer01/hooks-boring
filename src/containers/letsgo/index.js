@@ -15,7 +15,7 @@ import Twitter from "../../assets/icons/twitter.svg";
 import Facebook from "../../assets/icons/facebook.svg";
 import Whatsapp from "../../assets/icons/whatsapp.svg";
 
-const Conatiner = styled.div`
+const Container = styled.div`
 	flex: 1;
 	display: flex;
 	flex-direction: column;
@@ -59,6 +59,7 @@ const FeatureImg = styled.img`
 
 const Title = styled.h3`
 	align-self: left;
+	margin-top: 20px;
 `;
 
 const LinkIcon = styled.img`
@@ -70,8 +71,9 @@ const ShareIcon = styled.img`
 	height: 25px;
 	margin-left: 15px;
 	cursor: pointer;
+	opacity: 0.8;
 	&:hover {
-		opacity: 0.8;
+		opacity: 1;
 	}
 `;
 
@@ -102,13 +104,17 @@ const Letsgo = ({ data, history }) => {
 	const activity = JSON.parse(window.localStorage.getItem("activity"));
 
 	useEffect(() => {
+		let activityId = activity.sys.id;
+		if (history.location.search) {
+			activityId = history.location.search.split("=")[1];
+		}
 		client
-			.getEntry(activity.sys.id)
+			.getEntry(activityId)
 			.then(entry => {
 				setSelected(entry);
 			})
 			.catch(error => console.log(error));
-	}, [activity.sys.id]);
+	}, [activity.sys.id, history.location.search]);
 
 	const renderTags = tag => (
 		<Tag key={tag}>
@@ -122,7 +128,7 @@ const Letsgo = ({ data, history }) => {
 				<title>{activity.fields.title}</title>
 				<meta name="description" content="Where you are comfortable." />
 			</Helmet>
-			<Conatiner>
+			<Container>
 				{selected ? (
 					<>
 						<Details>
@@ -140,7 +146,7 @@ const Letsgo = ({ data, history }) => {
 											href={selected.fields.links[0]}
 										>
 											<Row>
-												<h3>Try Now</h3>
+												<h3 style={{ marginLeft: 10 }}>Try Now</h3>
 												<LinkIcon
 													size="small"
 													src={ExternalLink}
@@ -153,21 +159,21 @@ const Letsgo = ({ data, history }) => {
 								<Row>
 									<h3>Spread Fun</h3>
 									<TwitterShareButton
-										url="https://what2do.netlify.com"
+										url={`https://what2do.netlify.com/letsgo?ref=${activity.sys.id}`}
 										title={`I will be busy with activity ${selected.fields.title}, find what you can do with your time at`}
 										hashtags={selected.fields.tags}
 									>
 										<ShareIcon src={Twitter} alt="Tweet" />
 									</TwitterShareButton>
 									<FacebookShareButton
-										url="https://what2do.netlify.com"
+										url={`https://what2do.netlify.com/letsgo?ref=${activity.sys.id}`}
 										quote={`I will be busy with activity ${selected.fields.title}, find what you can do with your time at https://what2do.netlify.com \n`}
 										hashtags={selected.fields.tags}
 									>
 										<ShareIcon src={Facebook} alt="Tweet" />
 									</FacebookShareButton>
 									<WhatsappShareButton
-										url="https://what2do.netlify.com"
+										url={`https://what2do.netlify.com/letsgo?ref=${activity.sys.id}`}
 										title={`I will be busy with activity ${selected.fields.title}, find what you can do with your time at`}
 										separator=" 👉 "
 									>
@@ -185,7 +191,7 @@ const Letsgo = ({ data, history }) => {
 				) : (
 					<Loader />
 				)}
-			</Conatiner>
+			</Container>
 		</Layout>
 	);
 };
