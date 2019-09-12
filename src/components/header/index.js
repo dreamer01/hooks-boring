@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-import logo from "../../assets/icons/logo.svg";
+import { Logo as logo } from "../../utils/images";
 
 const Row = styled.div`
 	display: flex;

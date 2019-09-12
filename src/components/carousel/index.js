@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
-import UpArrow from "../../assets/icons/up-arrow.svg";
+import { UpArrow } from "../../utils/images";
 
 const Wrapper = styled.div`
 	display: flex;
@@ -22,17 +22,41 @@ const Container = styled.div`
 	}
 `;
 
-const PrevIcon = styled.img`
-	height: ${props => (props.size === "small" ? "25px" : "25px")};
-	transform: rotate(-90deg);
-	@media (max-width: 500px) {
-		display: none;
+const Icon = styled.img`
+	height: 25px;
+	&.left {
+		transform: rotate(-90deg);
 	}
+	&.right {
+		transform: rotate(90deg);
+	}
+	cursor: pointer;
 `;
 
-const NextIcon = styled.img`
-	height: ${props => (props.size === "small" ? "25px" : "25px")};
-	transform: rotate(90deg);
+const IconBox = styled.div`
+	height: 450px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+	width: 80px;
+	&.right {
+		background-image: linear-gradient(
+			to right,
+			rgba(238, 238, 238, 0),
+			#fdf9f8 20px
+		);
+		right: 20px;
+	}
+	&.left {
+		background-image: linear-gradient(
+			to left,
+			rgba(238, 238, 238, 0),
+			#fdf9f8 20px
+		);
+		left: 20px;
+	}
+	z-index: 10;
 	@media (max-width: 500px) {
 		display: none;
 	}
@@ -50,24 +74,38 @@ function Carousel({ children, ...props }) {
 
 	const handlePrev = event => {
 		event.preventDefault();
-		document.getElementById("carousel").scrollLeft -= 300;
+		document.getElementById("carousel").scrollLeft -= 400;
 	};
 
 	const handleNext = event => {
 		event.preventDefault();
-		document.getElementById("carousel").scrollLeft += 300;
+		document.getElementById("carousel").scrollLeft += 400;
 	};
 
 	return (
 		<Wrapper id="carousel-wrapper">
 			{showControls && (
-				<PrevIcon onClick={handlePrev} src={UpArrow} alt="prev" />
+				<IconBox className="left">
+					<Icon
+						className="left"
+						onClick={handlePrev}
+						src={UpArrow}
+						alt="prev"
+					/>
+				</IconBox>
 			)}
 			<Container id="carousel" onKeyUp={handlePrev} onKeyDown={handleNext}>
 				{children}
 			</Container>
 			{showControls && (
-				<NextIcon onClick={handleNext} src={UpArrow} alt="next" />
+				<IconBox className="right">
+					<Icon
+						className="right"
+						onClick={handleNext}
+						src={UpArrow}
+						alt="next"
+					/>
+				</IconBox>
 			)}
 		</Wrapper>
 	);
