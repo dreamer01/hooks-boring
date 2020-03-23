@@ -11,7 +11,7 @@ export default () => {
 	return (
 		<Wrapper>
 			<p>
-				Copyright &copy; 2019 &nbsp;
+				Copyright &copy; 2020 &nbsp;
 				<ReactGA.OutboundLink
 					eventLabel="twitter-profile-visit"
 					to="https://www.twitter.com/stud2design"

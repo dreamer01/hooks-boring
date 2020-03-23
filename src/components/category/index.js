@@ -12,7 +12,7 @@ const Wrapper = styled.div`
 	}
 `;
 
-const Conatiner = styled.div`
+const Container = styled.div`
 	display: flex;
 	flex-flow: row wrap;
 	width: 200px;
@@ -77,7 +77,7 @@ const Card = ({ src, title, isCategory }) => {
 
 			<ImagePalette crossOrigin={true} image={src}>
 				{({ backgroundColor, color, alternativeColor }) => (
-					<Conatiner>
+					<Container>
 						<Shape width="200" height="65">
 							<g>
 								<path
@@ -93,7 +93,7 @@ const Card = ({ src, title, isCategory }) => {
 						<Inner shadow={alternativeColor} style={{ backgroundColor: color }}>
 							<Title style={{ color: backgroundColor }}>{title}</Title>
 						</Inner>
-					</Conatiner>
+					</Container>
 				)}
 			</ImagePalette>
 		</Wrapper>

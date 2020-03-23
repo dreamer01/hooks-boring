@@ -5,7 +5,13 @@ import Helmet from "react-helmet";
 
 import client from "../../utils/contentful";
 import useLocalStorage from "../../hooks/useLocalStorage";
-import { Layout, Carousel, Category, Loader } from "../../components";
+import {
+	Layout,
+	Carousel,
+	Category,
+	Loader,
+	CoronaWarning,
+} from "../../components";
 
 const Content = styled.div`
 	display: flex;
@@ -54,13 +60,17 @@ export default ({ data }) => {
 					content="What you are interested to do today."
 				/>
 			</Helmet>
-			<Content>
-				{categories ? (
-					<Carousel>{categories.map(renderCategories)}</Carousel>
-				) : (
-					<Loader />
-				)}
-			</Content>
+			{indoor === "true" ? (
+				<Content>
+					{categories ? (
+						<Carousel>{categories.map(renderCategories)}</Carousel>
+					) : (
+						<Loader />
+					)}
+				</Content>
+			) : (
+				<CoronaWarning />
+			)}
 		</Layout>
 	);
 };
