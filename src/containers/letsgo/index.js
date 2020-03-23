@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import Helmet from "react-helmet";
 import {
 	TwitterShareButton,
 	FacebookShareButton,
@@ -16,7 +15,7 @@ import {
 	Facebook,
 	Whatsapp,
 } from "../../utils/images";
-import { Layout, Loader } from "../../components";
+import { Layout, Loader, SEO } from "../../components";
 
 const Container = styled.div`
 	flex: 1;
@@ -132,10 +131,11 @@ const Letsgo = ({ data, history }) => {
 
 	return (
 		<Layout>
-			<Helmet>
-				<title>{selected ? selected.fields.title : "Activity"}</title>
-				<meta name="description" content="Where you are comfortable." />
-			</Helmet>
+			<SEO
+				title={selected ? selected.fields.title : "Activity"}
+				description={selected && selected.fields.description}
+				image={selected && selected.fields.featureImg[0].fields.file.url}
+			/>
 			<Container>
 				{selected ? (
 					<>

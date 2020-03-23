@@ -1,9 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import Helmet from "react-helmet";
 import { Link } from "react-router-dom";
 
-import Layout from "../../components/layout";
+import { Layout, SEO } from "../../components";
 import Room from "../../assets/images/room.svg";
 import Hangout from "../../assets/images/hangout.svg";
 import useLocalStorage from "../../hooks/useLocalStorage";
@@ -41,10 +40,11 @@ export default () => {
 	return (
 		<div>
 			<Layout>
-				<Helmet>
-					<title>Where we heading ?</title>
-					<meta name="description" content="Where you are comfortable." />
-				</Helmet>
+				<SEO
+					title="Where we heading ?"
+					description="Where you are comfortable."
+					image={Hangout}
+				/>
 				<Container>
 					<ActionGroup>
 						<Link to="/what">

@@ -1,8 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import Helmet from "react-helmet";
 
-import Layout from "../../components/layout";
+import { Layout, SEO } from "../../components";
 import Thinking from "../../assets/images/thinking.svg";
 
 const Wrapper = styled.div`
@@ -25,16 +24,20 @@ const Text = styled.p`
 	margin: 10px auto;
 `;
 
+export const Row = styled.div`
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	margin: 10px 0px;
+`;
+
 export default function About() {
 	return (
 		<Layout>
-			<Helmet>
-				<title>About</title>
-				<meta
-					name="description"
-					content="So here is what we deliver to you with our blazing fast suggestion web app What2Do."
-				/>
-			</Helmet>
+			<SEO
+				title="What2Do"
+				description="So here is what we deliver to you with our blazing fast suggestion web app What2Do."
+			/>
 			<ActionImg src={Thinking} alt="about" />
 			<Wrapper>
 				<Heading>What is What2Do ?</Heading>
@@ -53,14 +56,32 @@ export default function About() {
 
 				<Heading>About Creator ?</Heading>
 				<Text>
-					I love developing applications and solution which tend to solve
-					complex problems. I’m creating web and mobile experiences for the next
-					generation consumer-facing companies. I am also big time sucker for
-					design and illustration, when I am free I like to do some graphic
-					design work. If I find an amazing color palette or font, I have to
-					build an app or website using them, because of this I have many
-					unfinished side projects.
+					Myself Pushpendra Singh, I’m a Full Stack Developer based in
+					Bengaluru, India. I have passion for intuitive web and mobile design.I
+					love developing applications and solution which tend to solve
+					problems. I am also big time sucker for design and illustration, when
+					I am free I like to do some graphic design work. If I find an amazing
+					color palette or font, I have to build an app or website using them,
+					because of this I have many unfinished side projects.
 				</Text>
+				<Row>
+					<strong>Reach me at</strong> &nbsp;
+					<a target="blank" href="https://stud2design.tech">
+						My Site
+					</a>
+					&nbsp;|&nbsp;
+					<a target="blank" href="https://twitter.com/stud2design">
+						Twitter
+					</a>
+					&nbsp;|&nbsp;
+					<a target="blank" href="https://github.com/dreamer01">
+						Github
+					</a>
+					&nbsp;|&nbsp;
+					<a target="blank" href="https://linkedin.com/in/pushpendradream">
+						LinkedIn
+					</a>
+				</Row>
 			</Wrapper>
 		</Layout>
 	);

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import Helmet from "react-helmet";
 
 import client from "../../utils/contentful";
 import useLocalStorage from "../../hooks/useLocalStorage";
@@ -11,6 +10,7 @@ import {
 	Category,
 	Loader,
 	CoronaWarning,
+	SEO,
 } from "../../components";
 
 const Content = styled.div`
@@ -53,13 +53,12 @@ export default ({ data }) => {
 
 	return (
 		<Layout>
-			<Helmet>
-				<title>What interest you ?</title>
-				<meta
-					name="description"
-					content="What you are interested to do today."
-				/>
-			</Helmet>
+			<SEO
+				title="What interest you ?"
+				description="What you are interested to do today."
+				image={categories && categories[0].fields.featureImg.fields.file.url}
+			/>
+
 			{indoor === "true" ? (
 				<Content>
 					{categories ? (

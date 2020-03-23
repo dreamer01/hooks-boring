@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import Helmet from "react-helmet";
 import { Link } from "react-router-dom";
 
 import client from "../../utils/contentful";
@@ -10,6 +9,7 @@ import {
 	Category as Activity,
 	Loader,
 	Carousel,
+	SEO,
 } from "../../components";
 
 const Content = styled.div`
@@ -60,13 +60,11 @@ export default ({ data }) => {
 
 	return (
 		<Layout>
-			<Helmet>
-				<title>{category ? category.fields.title : "Category"}</title>
-				<meta name="description" content="Where you are comfortable." />
-				<noscript>
-					To display activity list, the app will require Javascript.
-				</noscript>
-			</Helmet>
+			<SEO
+				title={category ? category.fields.title : "Category"}
+				description="What you will start with now that we are here ?"
+				image={category && category.fields.featureImg.fields.file.url}
+			/>
 			<Content>
 				{activities ? (
 					<Carousel>{activities.map(renderActivities)}</Carousel>

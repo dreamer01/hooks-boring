@@ -1,9 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import Helmet from "react-helmet";
 import { Link } from "react-router-dom";
 
-import Layout from "../../components/layout";
+import { Layout, SEO } from "../../components";
 import AloneSvg from "../../assets/images/alone.svg";
 import CompanySvg from "../../assets/images/company.svg";
 import useLocalStorage from "../../hooks/useLocalStorage";
@@ -41,13 +40,10 @@ export default () => {
 	return (
 		<>
 			<Layout>
-				<Helmet>
-					<title>What2Do</title>
-					<meta
-						name="description"
-						content="Lets find you an activity to do and use that time of yours fruitfully."
-					/>
-				</Helmet>
+				<SEO
+					title="What2Do"
+					description="You are bored. Lets find you an activity to do and use this time of yours fruitfully."
+				/>
 				<Container>
 					<ActionGroup>
 						<Link to="/where">
