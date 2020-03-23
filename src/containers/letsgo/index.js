@@ -121,7 +121,8 @@ const Letsgo = ({ data, history }) => {
 				setSelected(entry);
 			})
 			.catch(error => console.log(error));
-	}, [activity, history.location.search]);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [history.location.search]);
 
 	const renderTags = tag => (
 		<Tag key={tag}>

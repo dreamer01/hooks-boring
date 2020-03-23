@@ -55,7 +55,8 @@ export default ({ data }) => {
 			  };
 
 		client.getEntries(options).then(entries => setActivities(entries.items));
-	}, [multiplayer, category]);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	return (
 		<Layout>
