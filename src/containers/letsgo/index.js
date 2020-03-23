@@ -27,7 +27,7 @@ const Container = styled.div`
 	justify-content: space-around;
 `;
 
-const Row = styled.div`
+export const Row = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -78,7 +78,7 @@ const Title = styled.h3`
 	margin-top: 20px;
 `;
 
-const LinkIcon = styled.img`
+export const LinkIcon = styled.img`
 	height: 15px;
 	margin-left: 10px;
 `;

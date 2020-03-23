@@ -6,6 +6,7 @@ import Facebook from "../assets/icons/facebook.svg";
 import Whatsapp from "../assets/icons/whatsapp.svg";
 import UpArrow from "../assets/icons/up-arrow.svg";
 import DownArrow from "../assets/icons/down-arrow.svg";
+import CoronaSvg from "../assets/images/corona.svg";
 
 export {
 	ExternalLink,
@@ -16,4 +17,5 @@ export {
 	Whatsapp,
 	UpArrow,
 	DownArrow,
+	CoronaSvg,
 };
