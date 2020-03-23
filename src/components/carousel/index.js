@@ -13,7 +13,7 @@ const Wrapper = styled.div`
 const Container = styled.div`
 	display: flex;
 	margin: auto;
-	padding-top: 100px;
+	/* padding-top: 100px; */
 	padding-bottom: 100px;
 	overflow-x: auto;
 	scroll-behavior: smooth;
@@ -57,7 +57,7 @@ const IconBox = styled.div`
 		left: 20px;
 	}
 	z-index: 10;
-	@media (max-width: 500px) {
+	@media (max-width: 480px) {
 		display: none;
 	}
 `;
