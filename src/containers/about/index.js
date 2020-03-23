@@ -45,10 +45,21 @@ export default function About() {
 					helps you find an activity of your interest by four QnA selection
 					steps process. What2Do make sure of it that your free time is
 					efficiently spent by you while doing something of your interest and
-					just for sake of timepass. It helps you explore and discover new
+					not just for sake of timepass. It helps you explore and discover new
 					things to do with your time. The recommendation by What2Do varies from
 					Book, Movies mobile app to board games and many more interesting
 					activities around you.
+				</Text>
+
+				<Heading>About Creator ?</Heading>
+				<Text>
+					I love developing applications and solution which tend to solve
+					complex problems. I’m creating web and mobile experiences for the next
+					generation consumer-facing companies. I am also big time sucker for
+					design and illustration, when I am free I like to do some graphic
+					design work. If I find an amazing color palette or font, I have to
+					build an app or website using them, because of this I have many
+					unfinished side projects.
 				</Text>
 			</Wrapper>
 		</Layout>

@@ -4,11 +4,11 @@ import Helmet from "react-helmet";
 import { Link } from "react-router-dom";
 
 import Layout from "../../components/layout";
-import Romm from "../../assets/images/room.svg";
+import Room from "../../assets/images/room.svg";
 import Hangout from "../../assets/images/hangout.svg";
 import useLocalStorage from "../../hooks/useLocalStorage";
 
-const Conatiner = styled.div`
+const Container = styled.div`
 	flex: 1;
 	display: flex;
 	width: 100%;
@@ -36,7 +36,7 @@ const Action = styled.h2`
 `;
 
 export default () => {
-	const [indoor, setIndoor] = useLocalStorage("indoor", false);
+	const [indoor, setIndoor] = useLocalStorage("indoor", true);
 
 	return (
 		<div>
@@ -45,12 +45,12 @@ export default () => {
 					<title>Where we heading ?</title>
 					<meta name="description" content="Where you are comfortable." />
 				</Helmet>
-				<Conatiner>
+				<Container>
 					<ActionGroup>
 						<Link to="/what">
 							<ActionImg
 								onClick={() => setIndoor(true)}
-								src={Romm}
+								src={Room}
 								alt="At Home"
 							/>
 						</Link>
@@ -66,7 +66,7 @@ export default () => {
 						</Link>
 						<Action>No, Wanna Hangout</Action>
 					</ActionGroup>
-				</Conatiner>
+				</Container>
 			</Layout>
 		</div>
 	);

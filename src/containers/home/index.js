@@ -8,7 +8,7 @@ import AloneSvg from "../../assets/images/alone.svg";
 import CompanySvg from "../../assets/images/company.svg";
 import useLocalStorage from "../../hooks/useLocalStorage";
 
-const Conatiner = styled.div`
+const Container = styled.div`
 	flex: 1;
 	display: flex;
 	width: 100%;
@@ -48,7 +48,7 @@ export default () => {
 						content="Lets find you an activity to do and use that time of yours fruitfully."
 					/>
 				</Helmet>
-				<Conatiner>
+				<Container>
 					<ActionGroup>
 						<Link to="/where">
 							<ActionImg
@@ -69,7 +69,7 @@ export default () => {
 						</Link>
 						<Action>No, Got Company</Action>
 					</ActionGroup>
-				</Conatiner>
+				</Container>
 			</Layout>
 		</>
 	);
