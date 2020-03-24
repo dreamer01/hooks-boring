@@ -8,6 +8,7 @@ import What from "../what";
 import Which from "../which";
 import Letsgo from "../letsgo";
 import About from "../about";
+import NotFound from "../../components/not-found";
 
 function App() {
 	return (
@@ -18,6 +19,7 @@ function App() {
 			<Route exact path="/which" component={withTracker(Which)} />
 			<Route exact path="/letsgo" component={withTracker(Letsgo)} />
 			<Route exact path="/about" component={withTracker(About)} />
+			<Route exact path="*" component={withTracker(NotFound)} />
 		</Switch>
 	);
 }
