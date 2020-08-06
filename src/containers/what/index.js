@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { useLazyQuery, gql } from "@apollo/client";
 
-import client from "../../utils/contentful";
 import useLocalStorage from "../../hooks/useLocalStorage";
 import {
 	Layout,
@@ -13,6 +13,22 @@ import {
 	SEO,
 } from "../../components";
 
+const GET_CATEGORIES = gql`
+	query getCategories($indoor: Boolean!) {
+		categoryCollection(where: { indoor: $indoor }) {
+			items {
+				sys {
+					id
+				}
+				title
+				featureImg {
+					url
+				}
+			}
+		}
+	}
+`;
+
 const Content = styled.div`
 	display: flex;
 	flex: 1;
@@ -21,22 +37,21 @@ const Content = styled.div`
 	align-items: center;
 `;
 
-export default ({ data }) => {
-	const [categories, setCategories] = useState(null);
+export default () => {
+	const [loading, setLoading] = useState(true);
 	const [category, setCategory] = useLocalStorage("category", "");
-	const indoor = window.localStorage.getItem("indoor");
+	const [indoor] = useLocalStorage("indoor", true);
+
+	const [fetchCategories, { data }] = useLazyQuery(GET_CATEGORIES);
 
 	useEffect(() => {
-		const isIndoor = indoor || true;
-		client
-			.getEntries({
-				"fields.indoor": `${isIndoor}`,
-				content_type: "category",
-			})
-			.then(entries => {
-				setCategories(entries.items);
-			});
-	}, [indoor]);
+		if (!indoor) setLoading(false);
+		else fetchCategories({ variables: { indoor } });
+	}, [fetchCategories, indoor]);
+
+	useEffect(() => {
+		if (data) setLoading(false);
+	}, [data]);
 
 	const renderCategories = category => (
 		<Link
@@ -44,10 +59,7 @@ export default ({ data }) => {
 			key={category.sys.id}
 			to="/which"
 		>
-			<Category
-				src={category.fields.featureImg.fields.file.url}
-				title={category.fields.title}
-			/>
+			<Category src={category.featureImg.url} title={category.title} />
 		</Link>
 	);
 
@@ -56,15 +68,17 @@ export default ({ data }) => {
 			<SEO
 				title="What interest you ?"
 				description="What you are interested to do today."
-				image={categories && categories[0].fields.featureImg.fields.file.url}
+				image={data && data.categoryCollection.items[0].featureImg.url}
 			/>
 
-			{indoor === "true" ? (
+			{indoor ? (
 				<Content>
-					{categories ? (
-						<Carousel>{categories.map(renderCategories)}</Carousel>
-					) : (
+					{loading ? (
 						<Loader />
+					) : (
+						<Carousel>
+							{data.categoryCollection.items.map(renderCategories)}
+						</Carousel>
 					)}
 				</Content>
 			) : (

@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import { useLazyQuery, gql } from "@apollo/client";
 import {
 	TwitterShareButton,
 	FacebookShareButton,
 	WhatsappShareButton,
 } from "react-share";
 
-import client from "../../utils/contentful";
+import useLocalStorage from "../../hooks/useLocalStorage";
 import { Colors } from "../../theme/styles";
 import {
 	ExternalLink,
@@ -16,6 +17,26 @@ import {
 	Whatsapp,
 } from "../../utils/images";
 import { Layout, Loader, SEO } from "../../components";
+
+const GET_ACTIVITY = gql`
+	query getActivity($id: String!) {
+		activity(id: $id) {
+			sys {
+				id
+			}
+			title
+			featureImgCollection {
+				items {
+					url
+				}
+			}
+			links
+			tags
+			usedBy
+			description
+		}
+	}
+`;
 
 const Container = styled.div`
 	flex: 1;
@@ -105,23 +126,27 @@ const Tag = styled.div`
 	}
 `;
 
-const Letsgo = ({ data, history }) => {
+const Letsgo = ({ history }) => {
+	const [loading, setLoading] = useState(true);
 	const [selected, setSelected] = useState(null);
-	const activity = JSON.parse(window.localStorage.getItem("activity"));
+	const [activity] = useLocalStorage("activity", null);
+
+	const [fetchCategories, { data }] = useLazyQuery(GET_ACTIVITY);
 
 	useEffect(() => {
 		let activityId = activity && activity.sys.id;
 		if (history.location.search) {
 			activityId = history.location.search.split("=")[1];
 		}
-		client
-			.getEntry(activityId)
-			.then(entry => {
-				setSelected(entry);
-			})
-			.catch(error => console.log(error));
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [history.location.search]);
+		fetchCategories({ variables: { id: activityId } });
+	}, [activity, fetchCategories, history.location.search]);
+
+	useEffect(() => {
+		if (data) {
+			setSelected(data.activity);
+			setLoading(false);
+		}
+	}, [data]);
 
 	const renderTags = tag => (
 		<Tag key={tag}>
@@ -132,26 +157,26 @@ const Letsgo = ({ data, history }) => {
 	return (
 		<Layout>
 			<SEO
-				title={selected ? selected.fields.title : "Activity"}
-				description={selected && selected.fields.description}
-				image={selected && selected.fields.featureImg[0].fields.file.url}
+				title={selected ? selected.title : "Activity"}
+				description={selected && selected.description}
+				image={selected && selected.featureImgCollection.items[0].url}
 			/>
 			<Container>
-				{selected ? (
+				{!loading ? (
 					<>
 						<Details>
-							<FeatureImg src={selected.fields.featureImg[0].fields.file.url} />
+							<FeatureImg src={selected.featureImgCollection.items[0].url} />
 							<Info>
 								<Row>
 									<Row className="round">
-										<h3> Used By {selected.fields.usedBy}</h3>
+										<h3> Used By {selected.usedBy}</h3>
 										<LinkIcon size="small" src={User} alt="User" />
 									</Row>
-									{!!selected.fields.links && (
+									{!!selected.links && (
 										<a
 											target="_blank"
 											rel="noopener noreferrer"
-											href={selected.fields.links[0]}
+											href={selected.links[0]}
 										>
 											<Row className="round">
 												<h3 style={{ marginLeft: 10 }}>Try Now</h3>
@@ -168,32 +193,32 @@ const Letsgo = ({ data, history }) => {
 									<h3>Spread Fun</h3>
 									<TwitterShareButton
 										url={`https://what2do.netlify.com/letsgo?ref=${selected.sys.id}`}
-										title={`I will be busy with activity ${selected.fields.title}, find what you can do with your time at`}
-										hashtags={selected.fields.tags}
+										title={`I will be busy with activity ${selected.title}, find what you can do with your time at`}
+										hashtags={selected.tags}
 									>
 										<ShareIcon src={Twitter} alt="Tweet" />
 									</TwitterShareButton>
 									<FacebookShareButton
 										url={`https://what2do.netlify.com/letsgo?ref=${selected.sys.id}`}
-										quote={`I will be busy with activity ${selected.fields.title}, find what you can do with your time at https://what2do.netlify.com \n`}
-										hashtags={selected.fields.tags}
+										quote={`I will be busy with activity ${selected.title}, find what you can do with your time at https://what2do.netlify.com \n`}
+										hashtags={selected.tags}
 									>
 										<ShareIcon src={Facebook} alt="Tweet" />
 									</FacebookShareButton>
 									<WhatsappShareButton
 										url={`https://what2do.netlify.com/letsgo?ref=${selected.sys.id}`}
-										title={`I will be busy with activity ${selected.fields.title}, find what you can do with your time at`}
+										title={`I will be busy with activity ${selected.title}, find what you can do with your time at`}
 										separator=" 👉 "
 									>
 										<ShareIcon src={Whatsapp} alt="Tweet" />
 									</WhatsappShareButton>
 								</Row>
-								<Row>{selected.fields.tags.map(renderTags)}</Row>
+								<Row>{selected.tags.map(renderTags)}</Row>
 							</Info>
 						</Details>
 						<div>
-							<Title>{selected.fields.title}</Title>
-							<p>{selected.fields.description}</p>
+							<Title>{selected.title}</Title>
+							<p>{selected.description}</p>
 						</div>
 					</>
 				) : (
