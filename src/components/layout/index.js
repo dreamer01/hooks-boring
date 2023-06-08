@@ -23,7 +23,7 @@ const Content = styled.div`
 	align-items: center;
 `;
 
-export default ({ children }) => {
+export default function Layout({ children }) {
 	return (
 		<Wrapper>
 			<Header />
@@ -31,4 +31,4 @@ export default ({ children }) => {
 			<Footer />
 		</Wrapper>
 	);
-};
+}

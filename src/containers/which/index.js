@@ -66,14 +66,14 @@ const Content = styled.div`
 	align-items: center;
 `;
 
-export default () => {
+export default function Which() {
 	const [loading, setLoading] = useState(true);
 	const [activities, setActivities] = useState(null);
-	const [activity, setActivity] = useLocalStorage("activity", "");
+	const [, setActivity] = useLocalStorage("activity", "");
 	const [multiplayer] = useLocalStorage("multiplayer", false);
 	const [category] = useLocalStorage("category", null);
 
-	const renderActivities = activity => (
+	const renderActivities = (activity) => (
 		<Link
 			onClick={() => setActivity(activity)}
 			key={activity.sys.id}
@@ -88,9 +88,8 @@ export default () => {
 	);
 
 	const [fetchActivities, { data }] = useLazyQuery(GET_ACTIVITIES);
-	const [fetchAllActivities, { data: allData }] = useLazyQuery(
-		GET_ALL_ACTIVITIES
-	);
+	const [fetchAllActivities, { data: allData }] =
+		useLazyQuery(GET_ALL_ACTIVITIES);
 
 	useEffect(() => {
 		if (multiplayer) fetchAllActivities();
@@ -101,13 +100,13 @@ export default () => {
 		const categoryId = category && category.sys.id;
 		if (data) {
 			const activitiesList = data.activityCollection.items.filter(
-				a => a.category.sys.id === categoryId
+				(a) => a.category.sys.id === categoryId
 			);
 			setActivities(activitiesList);
 		}
 		if (allData) {
 			const activitiesList = allData.activityCollection.items.filter(
-				a => a.category.sys.id === categoryId
+				(a) => a.category.sys.id === categoryId
 			);
 			setActivities(activitiesList);
 		}
@@ -133,4 +132,4 @@ export default () => {
 			</Content>
 		</Layout>
 	);
-};
+}

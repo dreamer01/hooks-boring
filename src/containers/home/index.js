@@ -34,8 +34,8 @@ const Action = styled.h2`
 	}
 `;
 
-export default () => {
-	const [multiplayer, setMultiplayer] = useLocalStorage("multiplayer", false);
+export default function Home() {
+	const [, setMultiplayer] = useLocalStorage("multiplayer", false);
 
 	return (
 		<>
@@ -69,4 +69,4 @@ export default () => {
 			</Layout>
 		</>
 	);
-};
+}

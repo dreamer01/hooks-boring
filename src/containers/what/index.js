@@ -37,9 +37,9 @@ const Content = styled.div`
 	align-items: center;
 `;
 
-export default () => {
+export default function What() {
 	const [loading, setLoading] = useState(true);
-	const [category, setCategory] = useLocalStorage("category", "");
+	const [, setCategory] = useLocalStorage("category", "");
 	const [indoor] = useLocalStorage("indoor", true);
 
 	const [fetchCategories, { data }] = useLazyQuery(GET_CATEGORIES);
@@ -53,7 +53,7 @@ export default () => {
 		if (data) setLoading(false);
 	}, [data]);
 
-	const renderCategories = category => (
+	const renderCategories = (category) => (
 		<Link
 			onClick={() => setCategory(category)}
 			key={category.sys.id}
@@ -86,4 +86,4 @@ export default () => {
 			)}
 		</Layout>
 	);
-};
+}

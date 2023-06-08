@@ -34,8 +34,8 @@ const Action = styled.h2`
 	}
 `;
 
-export default () => {
-	const [indoor, setIndoor] = useLocalStorage("indoor", true);
+export default function Where() {
+	const [, setIndoor] = useLocalStorage("indoor", true);
 
 	return (
 		<div>
@@ -70,4 +70,4 @@ export default () => {
 			</Layout>
 		</div>
 	);
-};
+}

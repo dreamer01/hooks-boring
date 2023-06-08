@@ -7,7 +7,7 @@ const Wrapper = styled.div`
 	text-align: center;
 `;
 
-export default () => {
+export default function Footer() {
 	return (
 		<Wrapper>
 			<p>
@@ -23,4 +23,4 @@ export default () => {
 			</p>
 		</Wrapper>
 	);
-};
+}

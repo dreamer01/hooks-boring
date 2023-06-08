@@ -33,7 +33,7 @@ const About = styled.p`
 	font-weight: 600;
 `;
 
-export default () => {
+export default function Header() {
 	return (
 		<Wrapper>
 			<Link to="/">
@@ -47,4 +47,4 @@ export default () => {
 			</Link>
 		</Wrapper>
 	);
-};
+}
