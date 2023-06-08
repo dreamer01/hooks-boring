@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Switch, Route } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import Home from "../home";
 import Where from "../where";
@@ -13,6 +13,15 @@ export const IndoorContext = React.createContext();
 export const CategoryContext = React.createContext();
 export const ActivityContext = React.createContext();
 
+const router = createBrowserRouter([
+	{ path: "/", element: <Home /> },
+	{ path: "/where", element: <Where /> },
+	{ path: "/what", element: <What /> },
+	{ path: "/which", element: <Which /> },
+	{ path: "/letsgo", element: <Letsgo /> },
+	{ path: "/about", element: <About /> },
+]);
+
 function App() {
 	const [multiplayer, setMultiplayer] = useState(false);
 	const [indoor, setIndoor] = useState(true);
@@ -24,14 +33,7 @@ function App() {
 			<IndoorContext.Provider value={[indoor, setIndoor]}>
 				<CategoryContext.Provider value={[category, setCategory]}>
 					<ActivityContext.Provider value={[activity, setActivity]}>
-						<Switch>
-							<Route exact path="/" component={Home} />
-							<Route exact path="/where" component={Where} />
-							<Route exact path="/what" component={What} />
-							<Route exact path="/which" component={Which} />
-							<Route exact path="/letsgo" component={Letsgo} />
-							<Route exact path="/about" component={About} />
-						</Switch>
+						<RouterProvider router={router} />
 					</ActivityContext.Provider>
 				</CategoryContext.Provider>
 			</IndoorContext.Provider>

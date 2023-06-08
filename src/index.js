@@ -1,6 +1,6 @@
 import React from "react";
-import ReactDOM from "react-dom";
-import { BrowserRouter } from "react-router-dom";
+import * as ReactDOM from "react-dom/client";
+
 import { TypographyStyle, GoogleFont } from "react-typography";
 import {
 	ApolloClient,
@@ -25,15 +25,15 @@ const client = new ApolloClient({
 	cache: new InMemoryCache(),
 });
 
-ReactDOM.render(
-	<BrowserRouter>
+ReactDOM.createRoot(document.getElementById("root")).render(
+	<div>
 		<TypographyStyle typography={typography} />
 		<GoogleFont typography={typography} />
 		<ApolloProvider client={client}>
 			<App />
 		</ApolloProvider>
-	</BrowserRouter>,
-	document.getElementById("root")
+	</div>
 );
+
 // serviceWorker.unregister();
 serviceWorker.register();

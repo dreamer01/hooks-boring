@@ -3,25 +3,26 @@
 	"version": "0.1.0",
 	"private": true,
 	"dependencies": {
-		"@apollo/client": "^3.1.1",
-		"graphql": "^15.3.0",
-		"react": "^16.8.6",
-		"react-dom": "^16.8.6",
-		"react-ga": "^2.5.7",
-		"react-helmet": "^5.2.1",
+		"@apollo/client": "^3.7.15",
+		"graphql": "^16.6.0",
+		"prop-types": "^15.8.1",
+		"react": "^18.2.0",
+		"react-dom": "^18.2.0",
+		"react-error-overlay": "6.0.9",
+		"react-ga": "^3.3.1",
+		"react-helmet": "^6.1.0",
 		"react-image-palette": "^0.2.4",
-		"react-router-dom": "^5.0.0",
-		"react-scripts": "3.0.0",
-		"react-share": "^3.0.1",
-		"react-typography": "^0.16.19",
-		"styled-components": "^4.2.0",
-		"typography": "^0.16.19"
+		"react-router-dom": "^6.12.1",
+		"react-scripts": "5.0.1",
+		"react-share": "^4.4.1",
+		"react-typography": "^0.16.23",
+		"styled-components": "6.0.0-rc.3",
+		"typography": "^0.16.21"
 	},
 	"scripts": {
-		"start": "react-scripts start",
-		"build": "react-scripts build",
-		"test": "react-scripts test",
-		"eject": "react-scripts eject",
+		"start": "craco start",
+		"build": "craco build",
+		"test": "craco test",
 		"lambda-serve": "netlify-lambda serve functions"
 	},
 	"eslintConfig": {
@@ -38,5 +39,9 @@
 			"last 1 firefox version",
 			"last 1 safari version"
 		]
+	},
+	"devDependencies": {
+		"@craco/craco": "^7.1.0",
+		"process": "^0.11.10"
 	}
 }

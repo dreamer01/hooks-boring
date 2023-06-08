@@ -72,12 +72,12 @@ function Carousel({ children, ...props }) {
 		setShowControls(showControls);
 	}, [showControls]);
 
-	const handlePrev = event => {
+	const handlePrev = (event) => {
 		event.preventDefault();
 		document.getElementById("carousel").scrollLeft -= 400;
 	};
 
-	const handleNext = event => {
+	const handleNext = (event) => {
 		event.preventDefault();
 		document.getElementById("carousel").scrollLeft += 400;
 	};
@@ -112,7 +112,7 @@ function Carousel({ children, ...props }) {
 }
 
 Carousel.propTypes = {
-	children: PropTypes.any,
+	children: PropTypes.element,
 };
 
 export default Carousel;

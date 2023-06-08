@@ -1,7 +1,7 @@
 import React from "react";
-import { Switch, Route } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import withTracker from "../../utils/withTracker";
+// import withTracker from "../../utils/withTracker";
 import Home from "../home";
 import Where from "../where";
 import What from "../what";
@@ -10,18 +10,18 @@ import Letsgo from "../letsgo";
 import About from "../about";
 import NotFound from "../../components/not-found";
 
+const router = createBrowserRouter([
+	{ path: "/", element: <Home /> },
+	{ path: "/where", element: <Where /> },
+	{ path: "/what", element: <What /> },
+	{ path: "/which", element: <Which /> },
+	{ path: "/letsgo", element: <Letsgo /> },
+	{ path: "/about", element: <About /> },
+	{ path: "*", element: <NotFound /> },
+]);
+
 function App() {
-	return (
-		<Switch>
-			<Route exact path="/" component={withTracker(Home)} />
-			<Route exact path="/where" component={withTracker(Where)} />
-			<Route exact path="/what" component={withTracker(What)} />
-			<Route exact path="/which" component={withTracker(Which)} />
-			<Route exact path="/letsgo" component={withTracker(Letsgo)} />
-			<Route exact path="/about" component={withTracker(About)} />
-			<Route exact path="*" component={withTracker(NotFound)} />
-		</Switch>
-	);
+	return <RouterProvider router={router} />;
 }
 
 export default App;
