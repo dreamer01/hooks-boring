@@ -4,14 +4,7 @@ import { Link } from "react-router-dom";
 import { useLazyQuery, gql } from "@apollo/client";
 
 import useLocalStorage from "../../hooks/useLocalStorage";
-import {
-	Layout,
-	Carousel,
-	Category,
-	Loader,
-	CoronaWarning,
-	SEO,
-} from "../../components";
+import { Layout, Carousel, Category, Loader, SEO } from "../../components";
 
 const GET_CATEGORIES = gql`
 	query getCategories($indoor: Boolean!) {
@@ -45,8 +38,7 @@ export default function What() {
 	const [fetchCategories, { data }] = useLazyQuery(GET_CATEGORIES);
 
 	useEffect(() => {
-		if (!indoor) setLoading(false);
-		else fetchCategories({ variables: { indoor } });
+		fetchCategories({ variables: { indoor } });
 	}, [fetchCategories, indoor]);
 
 	useEffect(() => {
@@ -71,19 +63,15 @@ export default function What() {
 				image={data && data.categoryCollection.items[0].featureImg.url}
 			/>
 
-			{indoor ? (
-				<Content>
-					{loading ? (
-						<Loader />
-					) : (
-						<Carousel>
-							{data.categoryCollection.items.map(renderCategories)}
-						</Carousel>
-					)}
-				</Content>
-			) : (
-				<CoronaWarning />
-			)}
+			<Content>
+				{loading ? (
+					<Loader />
+				) : (
+					<Carousel>
+						{data.categoryCollection.items.map(renderCategories)}
+					</Carousel>
+				)}
+			</Content>
 		</Layout>
 	);
 }

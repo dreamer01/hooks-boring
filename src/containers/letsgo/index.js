@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import { useLocation } from "react-router-dom";
 import { useLazyQuery, gql } from "@apollo/client";
 import {
 	TwitterShareButton,
@@ -126,20 +127,21 @@ const Tag = styled.div`
 	}
 `;
 
-const Letsgo = ({ history }) => {
+const Letsgo = () => {
 	const [loading, setLoading] = useState(true);
 	const [selected, setSelected] = useState(null);
 	const [activity] = useLocalStorage("activity", null);
+	const location = useLocation();
 
 	const [fetchCategories, { data }] = useLazyQuery(GET_ACTIVITY);
 
 	useEffect(() => {
 		let activityId = activity && activity.sys.id;
-		if (history.location.search) {
-			activityId = history.location.search.split("=")[1];
+		if (location.search) {
+			activityId = location.search.split("=")[1];
 		}
 		fetchCategories({ variables: { id: activityId } });
-	}, [activity, fetchCategories, history.location.search]);
+	}, [activity, fetchCategories, location.search]);
 
 	useEffect(() => {
 		if (data) {
@@ -148,7 +150,7 @@ const Letsgo = ({ history }) => {
 		}
 	}, [data]);
 
-	const renderTags = tag => (
+	const renderTags = (tag) => (
 		<Tag key={tag}>
 			<pre>{tag.toUpperCase()}</pre>
 		</Tag>
